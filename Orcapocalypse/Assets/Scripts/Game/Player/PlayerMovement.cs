@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // --- 1. TRANSITION FROM AIR TO WATER ---
-            // We use an 'if' here to handle the plunge
+            // Handle the plunge
             if (_rigidbody.gravityScale != 0)
             {
                 // Kill the current air-momentum so SmoothDamp starts from a clean slate
@@ -52,8 +52,7 @@ public class PlayerMovement : MonoBehaviour
                     _rigidbody.gravityScale = 0;
                 }
 
-                // We 'return' here to skip Normal Swimming for this frame
-                // This prevents the SmoothDamp "hiccup"
+                // Return here to skip Normal Swimming for this frame. Prevents the SmoothDamp "hiccup"
                 return;
             }
 
