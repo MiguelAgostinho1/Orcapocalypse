@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _surgeForce = 15f;
     [SerializeField] private float _surgeCooldown = 2f;
 
+    [Header("Testing Settings")]
+    [SerializeField] private ControlMode _currentMode = ControlMode.Keyboard;
+
     private Rigidbody2D _rigidbody;
     private Vector2 _movementInput;
     private Vector2 _smoothMovementInput;
@@ -22,10 +25,22 @@ public class PlayerMovement : MonoBehaviour
     private readonly float _divePull = -2f;
     private float _surgeTimer;
 
+    public enum ControlMode { Keyboard, Mouse }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.gravityScale = 0; 
+    }
+
+    private void Update()
+    {
+        // Toggle mode with the 'M' key for quick testing
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            _currentMode = (_currentMode == ControlMode.Keyboard) ? ControlMode.Mouse : ControlMode.Keyboard;
+            Debug.Log("Switched to: " + _currentMode);
+        }
     }
 
     private void FixedUpdate()
@@ -34,34 +49,65 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.y <= _waterLevel)
         {
-            // --- 1. Transition from Water to Air ---
-            // Handle the plunge
+            // --- 1. Transition (Your existing code) ---
             if (_rigidbody.gravityScale != 0)
             {
-                // Kill the current air-momentum so SmoothDamp starts from a clean slate
                 _smoothMovementInput = new Vector2(_rigidbody.linearVelocity.x / _speed, _divePull / _speed);
-
                 _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, _divePull);
-
-                if (transform.position.y + orcaHeight * 3 < _waterLevel)
-                {
-                    _rigidbody.gravityScale = 0;
-                }
-
-                // Return here to skip Normal Swimming for this frame. Prevents the SmoothDamp "hiccup"
+                if (transform.position.y + orcaHeight * 3 < _waterLevel) _rigidbody.gravityScale = 0;
                 return;
             }
 
-            // --- 2. Normal Swimming ---
-            _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
+            // --- 2. Normal Swimming (Isolated Modes) ---
+            Vector2 finalInput = Vector2.zero;
+
+            if (_currentMode == ControlMode.Keyboard)
+            {
+                finalInput = _movementInput;
+            }
+            else if (_currentMode == ControlMode.Mouse)
+            {
+                finalInput = GetMouseInput();
+            }
+
+            // Apply movement
+            _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, finalInput, ref _movementInputSmoothVelocity, 0.1f);
             _rigidbody.linearVelocity = _smoothMovementInput * _speed;
+
+            // Visuals: Rotate to face velocity
+            if (_rigidbody.linearVelocity.magnitude > 0.1f)
+            {
+                float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
         }
         else
         {
-            // --- 3. Air Physics ---
+            // --- 3. AIR PHYSICS ---
             _rigidbody.gravityScale = _gravityInAir;
-            float horizontalVel = _movementInput.x * _speed;
+
+            float horizontalVel = 0f;
+
+            if (_currentMode == ControlMode.Keyboard)
+            {
+                // WASD/Joystick keys
+                horizontalVel = _movementInput.x * _speed;
+            }
+            else if (_currentMode == ControlMode.Mouse)
+            {
+                // Mouse Position: If the mouse is to the right of the orca, move right
+                Vector2 mouseDir = GetMouseInput();
+                horizontalVel = mouseDir.x * _speed;
+            }
+
             _rigidbody.linearVelocity = new Vector2(horizontalVel, _rigidbody.linearVelocity.y);
+
+            // Visuals: Rotate to face the direction of the jump arc
+            if (_rigidbody.linearVelocity.magnitude > 0.1f)
+            {
+                float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
         }
     }
 
@@ -88,5 +134,25 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    private Vector2 GetMouseInput()
+    {
+        // --- 1. Get Mouse Position in World Space ---
+        Vector3 mousePos = Mouse.current.position.ReadValue();
+        mousePos.z = 10f;
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        // --- 2. Direction from Orca to Mouse ---
+        Vector2 directionToMouse = (Vector2)worldMousePos - (Vector2)transform.position;
+
+        // --- 3. Deadzone: If the mouse is right on top of the orca, don't move ---
+        // Prevents the orca from "shaking" when it reaches the cursor
+        if (directionToMouse.magnitude < 0.5f)
+        {
+            return Vector2.zero;
+        }
+
+        return directionToMouse.normalized;
     }
 }
