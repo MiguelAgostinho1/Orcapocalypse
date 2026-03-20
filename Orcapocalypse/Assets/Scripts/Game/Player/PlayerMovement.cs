@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _waterLevel = -0.08f;
     [SerializeField] private float _gravityInAir = 20f;
-    [SerializeField] private float _breachJumpForce = 1f;
 
     [Header("Surge Settings")]
     [SerializeField] private float _surgeForce = 15f;
     [SerializeField] private float _surgeCooldown = 2f;
 
     [Header("Testing Settings")]
-    [SerializeField] private ControlMode _currentMode = ControlMode.Keyboard;
+    [SerializeField] private ControlMode _currentMode = ControlMode.Classic;
+    [SerializeField] private TextMeshProUGUI _modeDisplayText;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _movementInput;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private readonly float _divePull = -2f;
     private float _surgeTimer;
 
-    public enum ControlMode { Keyboard, Mouse }
+    public enum ControlMode { Classic, Target }
 
     private void Awake()
     {
@@ -38,9 +39,28 @@ public class PlayerMovement : MonoBehaviour
         // Toggle mode with the 'M' key for quick testing
         if (Keyboard.current.mKey.wasPressedThisFrame)
         {
-            _currentMode = (_currentMode == ControlMode.Keyboard) ? ControlMode.Mouse : ControlMode.Keyboard;
+            _currentMode = (_currentMode == ControlMode.Classic) ? ControlMode.Target : ControlMode.Classic;
+            UpdateUI();
             Debug.Log("Switched to: " + _currentMode);
         }
+    }
+
+    private void UpdateUI()
+    {
+        if (_modeDisplayText != null)
+        {
+            string modeName = (_currentMode == ControlMode.Classic) ? "Classic (Keyboard/Gamepad)" : "Target (Mouse)";
+
+            // Rich Text to make the instruction smaller
+            string instruction = "\n<size=60%>Press 'M' to Toggle</color></size>";
+
+            _modeDisplayText.text = "Control Mode: " + modeName + instruction;
+        }
+    }
+
+    private void Start()
+    {
+        UpdateUI(); // Set the initial text
     }
 
     private void FixedUpdate()
@@ -49,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.y <= _waterLevel)
         {
-            // --- 1. Transition (Your existing code) ---
+            // --- 1. Transition ---
             if (_rigidbody.gravityScale != 0)
             {
                 _smoothMovementInput = new Vector2(_rigidbody.linearVelocity.x / _speed, _divePull / _speed);
@@ -58,14 +78,14 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            // --- 2. Normal Swimming (Isolated Modes) ---
+            // --- 2. Normal Swimming ---
             Vector2 finalInput = Vector2.zero;
 
-            if (_currentMode == ControlMode.Keyboard)
+            if (_currentMode == ControlMode.Classic)
             {
                 finalInput = _movementInput;
             }
-            else if (_currentMode == ControlMode.Mouse)
+            else if (_currentMode == ControlMode.Target)
             {
                 finalInput = GetMouseInput();
             }
@@ -74,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
             _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, finalInput, ref _movementInputSmoothVelocity, 0.1f);
             _rigidbody.linearVelocity = _smoothMovementInput * _speed;
 
-            // Visuals: Rotate to face velocity
+            // Rotate to face velocity
             if (_rigidbody.linearVelocity.magnitude > 0.1f)
             {
                 float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
@@ -88,12 +108,12 @@ public class PlayerMovement : MonoBehaviour
 
             float horizontalVel = 0f;
 
-            if (_currentMode == ControlMode.Keyboard)
+            if (_currentMode == ControlMode.Classic)
             {
                 // WASD/Joystick keys
                 horizontalVel = _movementInput.x * _speed;
             }
-            else if (_currentMode == ControlMode.Mouse)
+            else if (_currentMode == ControlMode.Target)
             {
                 // Mouse Position: If the mouse is to the right of the orca, move right
                 Vector2 mouseDir = GetMouseInput();
@@ -102,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
             _rigidbody.linearVelocity = new Vector2(horizontalVel, _rigidbody.linearVelocity.y);
 
-            // Visuals: Rotate to face the direction of the jump arc
+            // Rotate to face the direction of the jump arc
             if (_rigidbody.linearVelocity.magnitude > 0.1f)
             {
                 float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
@@ -113,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue inputValue)
     {
-        // Only allow surge if cooldown is over and we are underwater
+        // Only allow surge if cooldown is over and the orca is underwater
         if (inputValue.isPressed && Time.time >= _surgeTimer && transform.position.y <= _waterLevel)
         {
             // --- 1. Get the direction (if no input, surge forward/right) ---
