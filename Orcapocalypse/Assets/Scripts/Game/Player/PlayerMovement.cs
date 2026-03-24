@@ -1,8 +1,9 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,27 +11,39 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _waterLevel = -0.08f;
     [SerializeField] private float _gravityInAir = 20f;
+    [SerializeField] private float _flipSpeed = 10f;
 
     [Header("Surge Settings")]
     [SerializeField] private float _surgeForce = 15f;
     [SerializeField] private float _surgeCooldown = 2f;
+    [SerializeField] private Sprite _idleSprite;
+    [SerializeField] private Sprite _surgeSprite;
+    [SerializeField] private float _spriteFlashDuration = 0.5f;
 
     [Header("Testing Settings")]
     [SerializeField] private ControlMode _currentMode = ControlMode.Classic;
     [SerializeField] private TextMeshProUGUI _modeDisplayText;
 
     private Rigidbody2D _rigidbody;
+    private SpriteRenderer _spriteRenderer;
     private Vector2 _movementInput;
     private Vector2 _smoothMovementInput;
     private Vector2 _movementInputSmoothVelocity;
     private readonly float _divePull = -2f;
     private float _surgeTimer;
+    private float _spriteResetTimer;
+    private bool _isSurging;
+    private float _flipTimer;
+    private float _flipDelay = 0.5f;
+    private bool _isFlipped;
+    private float _initialScale = 0.1f;
 
     public enum ControlMode { Classic, Target }
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody.gravityScale = 0; 
     }
 
@@ -42,6 +55,13 @@ public class PlayerMovement : MonoBehaviour
             _currentMode = (_currentMode == ControlMode.Classic) ? ControlMode.Target : ControlMode.Classic;
             UpdateUI();
             Debug.Log("Switched to: " + _currentMode);
+        }
+
+        // Sprite Reset Handler
+        if (_isSurging && Time.time >= _spriteResetTimer)
+        {
+            _spriteRenderer.sprite = _idleSprite;
+            _isSurging = false;
         }
     }
 
@@ -98,7 +118,37 @@ public class PlayerMovement : MonoBehaviour
             if (_rigidbody.linearVelocity.magnitude > 0.1f)
             {
                 float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, angle);
+
+                // 1.Smoothly rotate towards the velocity angle(This stays the same)
+                Quaternion targetRot = Quaternion.Euler(0, 0, angle);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.fixedDeltaTime * 10f);
+
+                // 2. Flip the Sprite Renderer instead of the Transform Scale
+                bool movingLeft = _rigidbody.linearVelocity.x < -0.1f;
+
+                if (movingLeft != _isFlipped)
+                {
+                    _flipTimer += Time.fixedDeltaTime;
+                    if (_flipTimer >= _flipDelay)
+                    {
+                        _isFlipped = movingLeft;
+                        _flipTimer = 0;
+                    }
+                }
+                else
+                {
+                    _flipTimer = 0;
+                }
+
+                // 3. Use flipY to keep the belly down without moving the object!
+                // If your sprite is pointing RIGHT: flipY handles the "upside down" look
+                // If your sprite is pointing LEFT: you might need flipX
+                float targetYScale = _isFlipped ? -_initialScale : _initialScale;
+
+                // Smoothly transition the current Y scale toward the target
+                float smoothedY = Mathf.Lerp(transform.localScale.y, targetYScale, Time.deltaTime * _flipSpeed);
+
+                transform.localScale = new Vector3(_initialScale, smoothedY, 1f);
             }
         }
         else
@@ -129,6 +179,13 @@ public class PlayerMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }
         }
+
+        if (_rigidbody.linearVelocity.magnitude <= 0.1f)
+        {
+            // Slowly rotate back to 0 (horizontal) over time
+            Quaternion targetRotation = Quaternion.Euler(0, 0, transform.localScale.y > 0 ? 0 : 180);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 2f);
+        }
     }
 
     private void OnJump(InputValue inputValue)
@@ -146,7 +203,15 @@ public class PlayerMovement : MonoBehaviour
             // --- 3. Reset the internal smooth damp so it doesn't "fight" the surge ---
             _smoothMovementInput = _rigidbody.linearVelocity / _speed;
 
-            // --- 4. Set cooldown ---
+            // --- 4. Trigger Surge Sprite ---
+            if (_spriteRenderer != null && _surgeSprite != null)
+            {
+                _isSurging = true;
+                _spriteRenderer.sprite = _surgeSprite;
+                _spriteResetTimer = Time.time + _spriteFlashDuration;
+            }
+
+            // --- 5. Set cooldown ---
             _surgeTimer = Time.time + _surgeCooldown;
         }
     }
