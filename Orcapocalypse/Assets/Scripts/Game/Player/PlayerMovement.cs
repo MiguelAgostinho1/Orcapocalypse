@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _waterLevel = -0.08f;
     [SerializeField] private float _gravityInAir = 20f;
-    [SerializeField] private float _flipSpeed = 10f;
+    [SerializeField] private float _flipSpeed = 5f;
+    [SerializeField] private float _flipDelay = 0.5f;
 
     [Header("Surge Settings")]
     [SerializeField] private float _surgeForce = 15f;
@@ -34,17 +35,57 @@ public class PlayerMovement : MonoBehaviour
     private float _spriteResetTimer;
     private bool _isSurging;
     private float _flipTimer;
-    private float _flipDelay = 0.5f;
     private bool _isFlipped;
-    private float _initialScale = 0.1f;
+    private float _initialScale;
+    private Coroutine _shakeCoroutine;
+
+    // Surging boolean to help with attack logic in other scripts
+    public bool IsSurging => _isSurging;
+
+    float _orcaHeight;
+    private float _stunTimer;
 
     public enum ControlMode { Classic, Target }
+
+    public void Stun(float duration)
+    {
+        _stunTimer = Time.time + duration;
+
+        // Restart the shake if one is already running
+        if (_shakeCoroutine != null) StopCoroutine(_shakeCoroutine);
+        _shakeCoroutine = StartCoroutine(ShakeSprite(duration));
+    }
+
+    private System.Collections.IEnumerator ShakeSprite(float duration)
+    {
+        float elapsed = 0f;
+        float shakeIntensity = 15f; // Degrees of rotation
+        float shakeSpeed = 20f;     // How fast it wobbles
+
+        while (elapsed < duration)
+        {
+            // Use a Sine wave for a smoother "back and forth" dizzy look
+            // We add this to the current rotation in HandleVisuals
+            float tilt = Mathf.Sin(Time.time * shakeSpeed) * shakeIntensity;
+
+            // We apply this tilt to the sprite's local rotation
+            _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, tilt);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset rotation back to perfectly aligned
+        _spriteRenderer.transform.localRotation = Quaternion.identity;
+    }
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody.gravityScale = 0; 
+        _initialScale = transform.localScale.x;
+        _orcaHeight = GetComponent<PolygonCollider2D>().bounds.extents.y;
     }
 
     private void Update()
@@ -83,9 +124,48 @@ public class PlayerMovement : MonoBehaviour
         UpdateUI(); // Set the initial text
     }
 
+    private void HandleVisuals()
+    {
+        if (_rigidbody.linearVelocity.magnitude > 0.1f)
+        {
+            // 1. Smooth Rotation
+            float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
+            Quaternion targetRot = Quaternion.Euler(0, 0, angle);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.fixedDeltaTime * 10f);
+
+            // 2. Flip Logic with Timer
+            bool movingLeft = _rigidbody.linearVelocity.x < -0.1f;
+            if (movingLeft != _isFlipped)
+            {
+                _flipTimer += Time.fixedDeltaTime;
+                if (_flipTimer >= _flipDelay)
+                {
+                    _isFlipped = movingLeft;
+                    _flipTimer = 0;
+                }
+            }
+            else { _flipTimer = 0; }
+
+            // 3. Smooth Roll (Scale)
+            float targetYScale = _isFlipped ? -_initialScale : _initialScale;
+            float smoothedY = Mathf.Lerp(transform.localScale.y, targetYScale, Time.fixedDeltaTime * _flipSpeed);
+            transform.localScale = new Vector3(_initialScale, smoothedY, 1f);
+        }
+        else
+        {
+            // Handle "Self-Righting" when idle
+            Quaternion targetRotation = Quaternion.Euler(0, 0, _isFlipped ? 180 : 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 2f);
+        }
+    }
+
     private void FixedUpdate()
     {
-        float orcaHeight = GetComponent<Collider2D>().bounds.extents.y;
+        if (Time.time < _stunTimer)
+        {
+            // While stunned, do NOTHING.
+            return;
+        }
 
         if (transform.position.y <= _waterLevel)
         {
@@ -94,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 _smoothMovementInput = new Vector2(_rigidbody.linearVelocity.x / _speed, _divePull / _speed);
                 _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, _divePull);
-                if (transform.position.y + orcaHeight * 3 < _waterLevel) _rigidbody.gravityScale = 0;
+                if (transform.position.y + _orcaHeight * 2 < _waterLevel) _rigidbody.gravityScale = 0;
                 return;
             }
 
@@ -113,43 +193,6 @@ public class PlayerMovement : MonoBehaviour
             // Apply movement
             _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, finalInput, ref _movementInputSmoothVelocity, 0.1f);
             _rigidbody.linearVelocity = _smoothMovementInput * _speed;
-
-            // Rotate to face velocity
-            if (_rigidbody.linearVelocity.magnitude > 0.1f)
-            {
-                float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
-
-                // 1.Smoothly rotate towards the velocity angle(This stays the same)
-                Quaternion targetRot = Quaternion.Euler(0, 0, angle);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.fixedDeltaTime * 10f);
-
-                // 2. Flip the Sprite Renderer instead of the Transform Scale
-                bool movingLeft = _rigidbody.linearVelocity.x < -0.1f;
-
-                if (movingLeft != _isFlipped)
-                {
-                    _flipTimer += Time.fixedDeltaTime;
-                    if (_flipTimer >= _flipDelay)
-                    {
-                        _isFlipped = movingLeft;
-                        _flipTimer = 0;
-                    }
-                }
-                else
-                {
-                    _flipTimer = 0;
-                }
-
-                // 3. Use flipY to keep the belly down without moving the object!
-                // If your sprite is pointing RIGHT: flipY handles the "upside down" look
-                // If your sprite is pointing LEFT: you might need flipX
-                float targetYScale = _isFlipped ? -_initialScale : _initialScale;
-
-                // Smoothly transition the current Y scale toward the target
-                float smoothedY = Mathf.Lerp(transform.localScale.y, targetYScale, Time.deltaTime * _flipSpeed);
-
-                transform.localScale = new Vector3(_initialScale, smoothedY, 1f);
-            }
         }
         else
         {
@@ -171,21 +214,10 @@ public class PlayerMovement : MonoBehaviour
             }
 
             _rigidbody.linearVelocity = new Vector2(horizontalVel, _rigidbody.linearVelocity.y);
-
-            // Rotate to face the direction of the jump arc
-            if (_rigidbody.linearVelocity.magnitude > 0.1f)
-            {
-                float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, angle);
-            }
         }
 
-        if (_rigidbody.linearVelocity.magnitude <= 0.1f)
-        {
-            // Slowly rotate back to 0 (horizontal) over time
-            Quaternion targetRotation = Quaternion.Euler(0, 0, transform.localScale.y > 0 ? 0 : 180);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 2f);
-        }
+        // Apply rotations to ensure the sprite is facing the right way
+        HandleVisuals();
     }
 
     private void OnJump(InputValue inputValue)
