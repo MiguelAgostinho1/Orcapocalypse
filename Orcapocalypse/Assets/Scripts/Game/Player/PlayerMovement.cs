@@ -64,11 +64,9 @@ public class PlayerMovement : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // Use a Sine wave for a smoother "back and forth" dizzy look
-            // We add this to the current rotation in HandleVisuals
+            // Sine wave for a smoother "back and forth" dizzy look
             float tilt = Mathf.Sin(Time.time * shakeSpeed) * shakeIntensity;
 
-            // We apply this tilt to the sprite's local rotation
             _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, tilt);
 
             elapsed += Time.deltaTime;
@@ -163,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.time < _stunTimer)
         {
-            // While stunned, do NOTHING.
+            // While stunned, do nothing.
             return;
         }
 
@@ -203,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (_currentMode == ControlMode.Classic)
             {
-                // WASD/Joystick keys
+                // WASD/Joystick input
                 horizontalVel = _movementInput.x * _speed;
             }
             else if (_currentMode == ControlMode.Target)

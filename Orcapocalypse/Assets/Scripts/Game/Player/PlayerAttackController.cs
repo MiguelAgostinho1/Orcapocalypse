@@ -52,10 +52,7 @@ public class PlayerAttackController : MonoBehaviour
             else
             {
                 boatHealth.TakeDamage(_bumpDamage);
-                // For now, the orca doesn't take damage.
-                // TODO: Re-enable Orca damage once Death State is implemented.
-                //_orcaHealth.TakeDamage(_selfDamage);
-                Debug.Log("<color=yellow>Orca hit a wreck, but damage is currently disabled for testing.</color>");
+                _orcaHealth.TakeDamage(_selfDamage);
 
                 // --- 1. Calculate Rebound ---
                 Vector2 hitPoint = collision.GetContact(0).point;
@@ -79,9 +76,7 @@ public class PlayerAttackController : MonoBehaviour
         if (collision.CompareTag("Yacht"))
         {
             // Damage Orca for being too close to the sinking yacht
-            // TODO: Re-enable Orca damage once Death State is implemented.
-            //_orcaHealth.TakeDamage(_selfDamage);
-            Debug.Log("<color=orange>ORCA CRUSHED:</color> Orca is inside the wreck! (Damage Skipped)");
+            _orcaHealth.TakeDamage(_selfDamage);
 
             // Small visual feedback for the player to show the siking yacht hurts
             _playerMovement.Stun(0.5f);
