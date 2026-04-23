@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public enum ControlMode { Classic, Target }
+
     [Header("Movement Settings")]
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _waterLevel = -0.08f;
@@ -14,12 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _flipSpeed = 5f;
     [SerializeField] private float _flipDelay = 0.5f;
 
-    [Header("Surge Settings")]
-    [SerializeField] private float _surgeForce = 15f;
-    [SerializeField] private float _surgeCooldown = 2f;
+    [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
     [SerializeField] private Sprite _surgeSprite;
-    [SerializeField] private float _spriteFlashDuration = 0.5f;
 
     [Header("Testing Settings")]
     [SerializeField] private ControlMode _currentMode = ControlMode.Classic;
@@ -31,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _smoothMovementInput;
     private Vector2 _movementInputSmoothVelocity;
     private readonly float _divePull = -2f;
-    private float _surgeTimer;
     private float _spriteResetTimer;
     private bool _isSurging;
     private float _flipTimer;
@@ -45,11 +43,26 @@ public class PlayerMovement : MonoBehaviour
     float _orcaHeight;
     private float _stunTimer;
 
-    public enum ControlMode { Classic, Target }
-
     public void Stun(float duration)
     {
         _stunTimer = Time.time + duration;
+
+        // Kill all physical momentum
+        if (_rigidbody != null)
+        {
+            _rigidbody.linearVelocity = Vector2.zero;
+        }
+
+        // Clear the input buffers so it doesn't "remember" old movement
+        _smoothMovementInput = Vector2.zero;
+        _movementInputSmoothVelocity = Vector2.zero;
+
+        // Cancel Surge Visuals immediately if stunned mid-surge
+        _isSurging = false;
+        if (_spriteRenderer != null && _idleSprite != null)
+        {
+            _spriteRenderer.sprite = _idleSprite;
+        }
 
         // Restart the shake if one is already running
         if (_shakeCoroutine != null) StopCoroutine(_shakeCoroutine);
@@ -218,31 +231,20 @@ public class PlayerMovement : MonoBehaviour
         HandleVisuals();
     }
 
-    private void OnJump(InputValue inputValue)
+    public Vector2 GetMovementInput() => _movementInput;
+
+    public void ResetSmoothDamp(Vector2 newVelocity)
     {
-        // Only allow surge if cooldown is over and the orca is underwater
-        if (inputValue.isPressed && Time.time >= _surgeTimer && transform.position.y <= _waterLevel)
+        _smoothMovementInput = newVelocity / _speed;
+    }
+
+    public void SetSurgeVisuals(Sprite attackSprite, float duration)
+    {
+        if (_spriteRenderer != null && attackSprite != null)
         {
-            // --- 1. Get the direction (if no input, surge forward/right) ---
-            Vector2 surgeDir = _movementInput.normalized;
-            if (surgeDir == Vector2.zero) surgeDir = transform.right;
-
-            // --- 2. Apply the boost ---
-            _rigidbody.linearVelocity = surgeDir * _surgeForce;
-
-            // --- 3. Reset the internal smooth damp so it doesn't "fight" the surge ---
-            _smoothMovementInput = _rigidbody.linearVelocity / _speed;
-
-            // --- 4. Trigger Surge Sprite ---
-            if (_spriteRenderer != null && _surgeSprite != null)
-            {
-                _isSurging = true;
-                _spriteRenderer.sprite = _surgeSprite;
-                _spriteResetTimer = Time.time + _spriteFlashDuration;
-            }
-
-            // --- 5. Set cooldown ---
-            _surgeTimer = Time.time + _surgeCooldown;
+            _isSurging = true;
+            _spriteRenderer.sprite = attackSprite;
+            _spriteResetTimer = Time.time + duration;
         }
     }
 

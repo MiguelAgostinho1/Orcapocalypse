@@ -1,6 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class FlickInputUI : MonoBehaviour
 {
@@ -15,14 +15,13 @@ public class FlickInputUI : MonoBehaviour
     public UILineDrawer trailLine;
 
     [Header("Gesture Logic")]
-    public System.Collections.Generic.List<Sectors> inputBuffer = new System.Collections.Generic.List<Sectors>();
+    public List<Sectors> inputBuffer = new List<Sectors>();
     public int bufferSize = 15;
     private Sectors lastRecordedSector = Sectors.Neutral;
-
-    [Header("Modular Gestures")]
-    public GesturePattern[] gestureLibrary;
     public float gestureTimeout = 0.5f; // Time allowed between inputs
-    private float lastInputTime;
+
+    [Header("Ability Settings")]
+    public PlayerAbility[] abilityLibrary;
 
     [Header("Gestures Success Visuals")]
     public Color successColor = Color.cyan;
@@ -40,14 +39,9 @@ public class FlickInputUI : MonoBehaviour
 
     private InputAction flickAction;
     private float maxRadius;
+    private float lastInputTime;
 
-    [System.Serializable]
-    public struct GesturePattern
-    {
-        public AttackType attackType;
-        public bool useStrictMatching; // True for rotations, False for flicks
-        public Sectors[] requiredSequence;
-    }
+    public PlayerCombat playerCombat;
 
 
     void Start()
@@ -145,23 +139,28 @@ public class FlickInputUI : MonoBehaviour
             return;
         }
 
-        foreach (var pattern in gestureLibrary)
+        if (abilityLibrary.Length <= 0)
         {
-            if (IsPatternMatched(pattern))
+            Debug.LogWarning("No gesture patterns defined in the ability library.");
+            return;
+        }
+
+        foreach (var ability in abilityLibrary)
+        {
+            if (IsPatternMatched(ability.requiredSequence, ability.strictMatching))
             {
-                ExecuteAttack(pattern.attackType, pattern.requiredSequence);
+                ExecuteAttack(ability.attackType, ability.requiredSequence);
                 inputBuffer.Clear();
                 break;
             }
         }
     }
 
-    bool IsPatternMatched(GesturePattern pattern)
+    bool IsPatternMatched(Sectors[] sequence, bool strictMatching)
     {
-        Sectors[] sequence = pattern.requiredSequence;
         if (inputBuffer.Count < sequence.Length) return false;
 
-        if (pattern.useStrictMatching)
+        if (strictMatching)
         {
             // STRICT: The sectors must be EXACTLY next to each other
             // Best for: Rotations (N -> NE -> E -> SE -> S...)
@@ -199,6 +198,11 @@ public class FlickInputUI : MonoBehaviour
 
         // Draw the "Ideal" version of the move
         trailLine.DrawPerfectLine(sequence, maxRadius);
+
+        if (playerCombat != null)
+        {
+            playerCombat.OnGestureRecognized(type);
+        }
     }
 
     float GetNormalizedAngle(float y, float x)

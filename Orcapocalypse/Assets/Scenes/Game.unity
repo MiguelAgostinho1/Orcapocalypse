@@ -298,6 +298,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+--- !u!114 &182706491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182706474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3c2079ad6b84146a924402d4490446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  abilities:
+  - {fileID: 0}
 --- !u!1 &278382888
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,6 +989,7 @@ MonoBehaviour:
   rawInput: {x: 0, y: 0}
   currentAngle: 0
   currentSector: 0
+  playerCombat: {fileID: 0}
 --- !u!114 &1385521700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1426,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 960502461836417758, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 182706475}
+    - targetCorrespondingSourceObject: {fileID: 960502461836417758, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 182706491}
   m_SourcePrefab: {fileID: 100100000, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
