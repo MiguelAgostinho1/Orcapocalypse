@@ -56,7 +56,7 @@ public class UILineDrawer : Graphic
         // 1. Start at Center
         points.Add(Vector2.zero);
 
-        // Flip curveOffset to negative for "Regular" (Right-leaning)
+        // Flip curveOffset to negative for Right-leaning curve
         float curveOffset = -maxRadius * 0.4f;
         Vector2 perpendicular = new Vector2(-finalDir.y, finalDir.x).normalized;
 
@@ -67,7 +67,7 @@ public class UILineDrawer : Graphic
         points.Add(startPos);
 
         // 3. Draw the Curved Up-swing with higher resolution
-        int curveResolution = 8; // Higher number = smoother line
+        int curveResolution = 8;
         for (int i = 1; i <= curveResolution; i++)
         {
             float t = i / (float)curveResolution;
@@ -79,7 +79,7 @@ public class UILineDrawer : Graphic
 
             if (i == curveResolution)
             {
-                // --- NEW: TILT CALCULATION ---
+                // Tilt Calculation
                 // Calculate direction from the previous point to the last point
                 // This ensures the arrow tilts with the curve
                 Vector2 lastDir = (offsetPoint - points[points.Count - 1]).normalized;
