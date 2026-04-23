@@ -26,8 +26,7 @@ public class FlickInputUI : MonoBehaviour
     [Header("Gestures Success Visuals")]
     public Color successColor = Color.cyan;
     public Color normalColor = new Color(74f / 255f, 0f / 255f, 214f / 255f);
-    public float normalThickness = 4f;
-    public float successThickness = 8f;
+    public float trailThickness = 4f;
     private bool isShowingSuccess = false;
     private float successTimer;
     public float successDisplayDuration = 0.3f;
@@ -40,6 +39,7 @@ public class FlickInputUI : MonoBehaviour
     private InputAction flickAction;
     private float maxRadius;
     private float lastInputTime;
+    private float gestureStartTime;
 
     public PlayerCombat playerCombat;
 
@@ -87,6 +87,7 @@ public class FlickInputUI : MonoBehaviour
     {
         if (Time.time - successTimer > successDisplayDuration)
         {
+            inputBuffer.Clear();
             isShowingSuccess = false;
             ResetTrailVisuals();
             trailLine.Clear();
@@ -95,6 +96,15 @@ public class FlickInputUI : MonoBehaviour
 
     private void UpdateGestureTracking()
     {
+        if (inputBuffer.Count > 0 && Time.time - gestureStartTime > gestureTimeout)
+        {
+            Debug.Log($"Gesture Expired: {Time.time - gestureStartTime:F2}s");
+            inputBuffer.Clear();
+            lastRecordedSector = Sectors.Neutral;
+            trailLine.Clear();
+            return;
+        }
+
         Sectors activeSector = Sectors.Neutral;
 
         if (rawInput.magnitude > 0.2f)
@@ -107,6 +117,7 @@ public class FlickInputUI : MonoBehaviour
         }
         else if (Time.time - lastInputTime > 0.1f)
         {
+            inputBuffer.Clear();
             trailLine.Clear();
         }
 
@@ -115,6 +126,11 @@ public class FlickInputUI : MonoBehaviour
         // Record changes in sector
         if (activeSector != lastRecordedSector)
         {
+            if (inputBuffer.Count == 0 && activeSector != Sectors.Neutral)
+            {
+                gestureStartTime = Time.time;
+            }
+
             lastRecordedSector = activeSector;
             inputBuffer.Add(activeSector);
 
@@ -128,7 +144,7 @@ public class FlickInputUI : MonoBehaviour
     private void ResetTrailVisuals()
     {
         trailLine.color = normalColor;
-        trailLine.thickness = normalThickness;
+        trailLine.thickness = trailThickness;
     }
 
     void CheckForGestures()
@@ -147,7 +163,7 @@ public class FlickInputUI : MonoBehaviour
 
         foreach (var ability in abilityLibrary)
         {
-            if (IsPatternMatched(ability.requiredSequence, ability.strictMatching))
+            if (IsPatternMatched(ability.requiredSequence))
             {
                 ExecuteAttack(ability.attackType, ability.requiredSequence);
                 inputBuffer.Clear();
@@ -156,33 +172,17 @@ public class FlickInputUI : MonoBehaviour
         }
     }
 
-    bool IsPatternMatched(Sectors[] sequence, bool strictMatching)
+    bool IsPatternMatched(Sectors[] sequence)
     {
-        if (inputBuffer.Count < sequence.Length) return false;
+        if (inputBuffer.Count != sequence.Length) return false;
 
-        if (strictMatching)
+        for (int i = 0; i < sequence.Length; i++)
         {
-            // STRICT: The sectors must be EXACTLY next to each other
-            // Best for: Rotations (N -> NE -> E -> SE -> S...)
-            for (int i = 0; i < sequence.Length; i++)
-            {
-                int bufferIndex = inputBuffer.Count - sequence.Length + i;
-                if (inputBuffer[bufferIndex] != sequence[i]) return false;
-            }
-            return true;
+            int bufferIndex = inputBuffer.Count - sequence.Length + i;
+            if (inputBuffer[bufferIndex] != sequence[i]) return false;
         }
-        else
-        {
-            // FLEXIBLE: Sectors just need to appear in order
-            // Best for: Flicks (South -> Neutral -> North)
-            int sequenceIndex = 0;
-            foreach (Sectors loggedSector in inputBuffer)
-            {
-                if (loggedSector == sequence[sequenceIndex]) sequenceIndex++;
-                if (sequenceIndex == sequence.Length) return true;
-            }
-            return false;
-        }
+
+        return true;
     }
 
     void ExecuteAttack(AttackType type, Sectors[] sequence)
@@ -194,15 +194,26 @@ public class FlickInputUI : MonoBehaviour
 
         // Visual "Pop"
         trailLine.color = successColor;
-        trailLine.thickness = successThickness;
+
+        // Calculate the Arrow Direction for Visual Feedback
+        Sectors finalSector = sequence[sequence.Length - 1];
+        Vector2 arrowDirection = GetVectorFromSector(finalSector);
 
         // Draw the "Ideal" version of the move
-        trailLine.DrawPerfectLine(sequence, maxRadius);
+        trailLine.DrawPerfectLine(sequence, maxRadius, arrowDirection);
 
         if (playerCombat != null)
         {
             playerCombat.OnGestureRecognized(type);
         }
+    }
+
+    // Helper to turn a Sector enum back into a Directional Vector
+    private Vector2 GetVectorFromSector(Sectors sector)
+    {
+        if (sector == Sectors.Neutral) return Vector2.zero;
+        float angle = (int)sector * 45f;
+        return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
 
     float GetNormalizedAngle(float y, float x)

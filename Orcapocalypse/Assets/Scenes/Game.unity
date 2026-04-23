@@ -445,6 +445,7 @@ MonoBehaviour:
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   thickness: 3
+  arrowSize: 10
 --- !u!222 &289937221
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -981,8 +982,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
   successColor: {r: 0, g: 1, b: 1, a: 1}
   normalColor: {r: 0.2901961, g: 0, b: 0.8392157, a: 1}
-  normalThickness: 4
-  successThickness: 8
+  trailThickness: 4
   successDisplayDuration: 1
   rawInput: {x: 0, y: 0}
   currentAngle: 0
@@ -1413,6 +1413,10 @@ PrefabInstance:
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: _flickUI
+      value: 
+      objectReference: {fileID: 1385521699}
     - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _modeDisplayText
       value: 

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7899566551921576254}
   - component: {fileID: 7778316014332368525}
   - component: {fileID: 4892696744121923263}
-  - component: {fileID: 6420312732282460921}
   - component: {fileID: 2000818793383585502}
   - component: {fileID: 7692838134618973941}
   - component: {fileID: 5856774213040129789}
@@ -144,11 +143,8 @@ MonoBehaviour:
   _gravityInAir: 3
   _flipSpeed: 5
   _flipDelay: 0.5
-  _surgeForce: 15
-  _surgeCooldown: 2
   _idleSprite: {fileID: -1807650363082549093, guid: 4fd7d7d02a290004a886cd56dbe2d204, type: 3}
   _surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  _spriteFlashDuration: 0.5
   _currentMode: 0
   _modeDisplayText: {fileID: 0}
 --- !u!114 &4892696744121923263
@@ -181,52 +177,6 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!61 &6420312732282460921
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960502461836417758}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.043956757, y: -0.047211647}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.390001, y: 18.7}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 18.670311, y: 18.906073}
-  m_EdgeRadius: 0
 --- !u!60 &2000818793383585502
 PolygonCollider2D:
   m_ObjectHideFlags: 0

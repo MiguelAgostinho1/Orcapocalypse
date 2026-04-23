@@ -6,7 +6,6 @@ public class PlayerAbility : ScriptableObject
     [Header("Ability Signature")]
     public string abilityName;
     public FlickInputUI.AttackType attackType;
-    public bool strictMatching; // True for rotations, False for flicks
     public FlickInputUI.Sectors[] requiredSequence;
 
     [Header("Physics")]
