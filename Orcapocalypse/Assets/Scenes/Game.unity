@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   abilities:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
 --- !u!1 &278382888
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,11 +976,9 @@ MonoBehaviour:
   trailLine: {fileID: 289937220}
   inputBuffer: 
   bufferSize: 10
-  gestureLibrary:
-  - attackType: 1
-    useStrictMatching: 0
-    requiredSequence: 060000006300000002000000
   gestureTimeout: 0.5
+  abilityLibrary:
+  - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
   successColor: {r: 0, g: 1, b: 1, a: 1}
   normalColor: {r: 0.2901961, g: 0, b: 0.8392157, a: 1}
   normalThickness: 4
@@ -989,7 +987,7 @@ MonoBehaviour:
   rawInput: {x: 0, y: 0}
   currentAngle: 0
   currentSector: 0
-  playerCombat: {fileID: 0}
+  playerCombat: {fileID: 182706491}
 --- !u!114 &1385521700
 MonoBehaviour:
   m_ObjectHideFlags: 0
