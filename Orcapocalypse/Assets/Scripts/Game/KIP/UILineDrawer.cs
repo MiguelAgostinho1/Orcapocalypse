@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static FlickInputUI;
-using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(CanvasRenderer))]
 public class UILineDrawer : Graphic
