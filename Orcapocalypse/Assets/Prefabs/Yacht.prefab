@@ -140,6 +140,7 @@ MonoBehaviour:
   _moveSpeed: 2
   _screenPadding: 1
   _currentDirection: -1
+  _patrolRange: 20
 --- !u!61 &7284911006185375829
 BoxCollider2D:
   m_ObjectHideFlags: 0

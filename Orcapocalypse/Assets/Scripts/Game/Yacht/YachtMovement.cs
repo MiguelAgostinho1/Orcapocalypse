@@ -13,6 +13,9 @@ public class YachtMovement : MonoBehaviour
     [SerializeField] private float _screenPadding = 1f;
     [SerializeField] private MoveDirection _currentDirection = MoveDirection.Left;
 
+    [Header("Fixed Patrol Settings")]
+    [SerializeField] private float _patrolRange = 20f;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private float _startYSettle;
@@ -25,10 +28,10 @@ public class YachtMovement : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _startYSettle = transform.position.y;
 
-        // Calculate Screen Bounds
-        float cameraDistance = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
-        _minX = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraDistance)).x + _screenPadding;
-        _maxX = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, cameraDistance)).x - _screenPadding;
+        // Calculate patrol boundaries based on initial position and patrol range
+        float spawnX = transform.position.x;
+        _minX = spawnX - _patrolRange;
+        _maxX = spawnX + _patrolRange;
 
         UpdateFacing();
     }
