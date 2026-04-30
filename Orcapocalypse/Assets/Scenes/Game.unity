@@ -312,6 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   abilities:
   - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
+  - {fileID: 11400000, guid: f8a27f3803401ae4aa91c46e04562cae, type: 2}
 --- !u!1 &278382888
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +981,7 @@ MonoBehaviour:
   gestureTimeout: 0.5
   abilityLibrary:
   - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
+  - {fileID: 11400000, guid: f8a27f3803401ae4aa91c46e04562cae, type: 2}
   successColor: {r: 0, g: 1, b: 1, a: 1}
   normalColor: {r: 0.2901961, g: 0, b: 0.8392157, a: 1}
   trailThickness: 4
