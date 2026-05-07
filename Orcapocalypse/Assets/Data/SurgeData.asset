@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
   abilityName: Surge
   attackType: 1
-  strictMatching: 0
   requiredSequence: 060000006300000002000000
-  force: 15
+  force: 20
   cooldown: 1
   surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
   spriteDuration: 0.5

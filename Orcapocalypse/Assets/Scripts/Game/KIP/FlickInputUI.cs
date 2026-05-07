@@ -20,6 +20,12 @@ public class FlickInputUI : MonoBehaviour
     private Sectors lastRecordedSector = Sectors.Neutral;
     public float gestureTimeout = 0.5f; // Time allowed between inputs
 
+    [Header("Leeway & Deadzones")]
+    [Range(0f, 0.5f)]
+    public float innerDeadzone = 0.25f; // Stick must move this far from center to count
+    [Range(0f, 20f)]
+    public float sectorLeeway = 10f;
+
     [Header("Ability Settings")]
     public PlayerAbility[] abilityLibrary;
 
@@ -107,7 +113,7 @@ public class FlickInputUI : MonoBehaviour
 
         Sectors activeSector = Sectors.Neutral;
 
-        if (rawInput.magnitude > 0.2f)
+        if (rawInput.magnitude > innerDeadzone)
         {
             float angle = GetNormalizedAngle(rawInput.y, rawInput.x);
             activeSector = (Sectors)CalculateSector(angle);
@@ -225,6 +231,25 @@ public class FlickInputUI : MonoBehaviour
 
     int CalculateSector(float angle)
     {
-        return Mathf.FloorToInt((angle + 22.5f) / 45f) % 8;
+        // 1. Calculate the sector
+        int idealSector = Mathf.FloorToInt((angle + 22.5f) / 45f) % 8;
+
+        // 2. If the right stick was neutral (no sector selected), just return the ideal one
+        if (lastRecordedSector == Sectors.Neutral) return idealSector;
+
+        // 3. Calculate the center angle of the sector the player is currently "holding"
+        float currentSectorCenter = (int)lastRecordedSector * 45f;
+
+        // 4. Find the difference between the right stick position and the center of the current sector
+        float angleDelta = Mathf.Abs(Mathf.DeltaAngle(angle, currentSectorCenter));
+
+        // 5. If the right stick is within (22.5 + leeway), stay in the current sector.
+        if (angleDelta < (22.5f + sectorLeeway))
+        {
+            return (int)lastRecordedSector;
+        }
+
+        // 6. The movement was intentional enough to switch
+        return idealSector;
     }
 }

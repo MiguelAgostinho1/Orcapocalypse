@@ -1238,9 +1238,12 @@ MonoBehaviour:
   inputBuffer: 
   bufferSize: 10
   gestureTimeout: 1
+  innerDeadzone: 0.25
+  sectorLeeway: 10
   abilityLibrary:
   - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
   - {fileID: 11400000, guid: f8a27f3803401ae4aa91c46e04562cae, type: 2}
+  - {fileID: 11400000, guid: dab1569a0b8a20b44b8139cf656213f5, type: 2}
   successColor: {r: 0, g: 1, b: 1, a: 1}
   normalColor: {r: 0.2901961, g: 0, b: 0.8392157, a: 1}
   trailThickness: 4
@@ -1364,8 +1367,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 445481459
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2967803868049465683, guid: f91468c5d083f934dab445fe868486c8, type: 3}
@@ -1373,7 +1376,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 100, y: 100}
+  m_Size: {x: 100, y: 7.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1587,6 +1590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 960502461836417758, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2583445969629150595, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -1629,8 +1636,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4092579114908198823, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: invincibilityDuration
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5393945220914500425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: abilities.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393945220914500425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: 'abilities.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: dab1569a0b8a20b44b8139cf656213f5, type: 2}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.size
       value: 4

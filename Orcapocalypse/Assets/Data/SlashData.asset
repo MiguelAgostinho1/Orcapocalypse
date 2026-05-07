@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc294caf21d4b5b4c876745ae7dd880c, type: 3}
-  m_Name: FlipData
+  m_Name: SlashData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
-  abilityName: Flip
-  attackType: 3
-  requiredSequence: 060000000700000000000000010000000200000003000000040000000500000006000000
+  abilityName: Slash
+  attackType: 1
+  requiredSequence: 040000006300000000000000
   force: 20
   cooldown: 1
   surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
