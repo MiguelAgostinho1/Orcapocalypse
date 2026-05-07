@@ -166,6 +166,7 @@ public class FlickInputUI : MonoBehaviour
             if (IsPatternMatched(ability.requiredSequence))
             {
                 ExecuteAttack(ability.attackType, ability.requiredSequence);
+                GamepadHaptics.Instance.VibrateSuccess();
                 inputBuffer.Clear();
                 break;
             }

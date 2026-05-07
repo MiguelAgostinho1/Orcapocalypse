@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 5856774213040129789}
   - component: {fileID: 4092579114908198823}
   - component: {fileID: 7884784571220269492}
+  - component: {fileID: 9076523684601475379}
+  - component: {fileID: 5393945220914500425}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -145,8 +147,6 @@ MonoBehaviour:
   _flipDelay: 0.5
   _idleSprite: {fileID: -1807650363082549093, guid: 4fd7d7d02a290004a886cd56dbe2d204, type: 3}
   _surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  _currentMode: 0
-  _modeDisplayText: {fileID: 0}
 --- !u!114 &4892696744121923263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,12 +253,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a34dae4bde3c34e9df5103543da339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 50
+  maxHealth: 50
   isInvincible: 0
   OnDied:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7778316014332368525}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9076523684601475379}
+        m_TargetAssemblyTypeName: PlayerDeathController, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDamage:
     m_PersistentCalls:
       m_Calls:
@@ -320,3 +344,31 @@ MonoBehaviour:
   _hitCooldown: 1
   _reboundForce: 2
   _stunDuration: 1
+--- !u!114 &9076523684601475379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960502461836417758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124092aef824f474a934e6496f2a0d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeath
+  _gameOverUI: {fileID: 0}
+--- !u!114 &5393945220914500425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960502461836417758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3c2079ad6b84146a924402d4490446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  abilities:
+  - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
+  - {fileID: 11400000, guid: f8a27f3803401ae4aa91c46e04562cae, type: 2}

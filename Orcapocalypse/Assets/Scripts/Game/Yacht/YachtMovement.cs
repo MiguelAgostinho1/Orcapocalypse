@@ -10,7 +10,6 @@ public class YachtMovement : MonoBehaviour
 
     [Header("Patrol Settings")]
     [SerializeField] private float _moveSpeed = 2f;
-    [SerializeField] private float _screenPadding = 1f;
     [SerializeField] private MoveDirection _currentDirection = MoveDirection.Left;
 
     [Header("Fixed Patrol Settings")]

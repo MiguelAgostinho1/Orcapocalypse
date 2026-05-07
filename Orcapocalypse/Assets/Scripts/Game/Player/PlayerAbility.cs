@@ -18,7 +18,7 @@ public class PlayerAbility : ScriptableObject
 
     public virtual void Activate(PlayerMovement movement, Rigidbody2D rb, SpriteRenderer sr)
     {
-        // 1. Water Check (so you don't surge through the air)
+        // 1. Water Check (so the player doesn't surge through the air)
         if (movement.transform.position.y > -0.08f) return;
 
         // 2. Default logic for a "Surge" style move
