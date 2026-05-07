@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
   abilityName: Slash
   attackType: 1
-  requiredSequence: 040000006300000000000000
+  requiredSequence: 060000006300000001000000
   force: 20
   cooldown: 1
   surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
