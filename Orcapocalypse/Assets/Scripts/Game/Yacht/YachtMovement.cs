@@ -68,6 +68,7 @@ public class YachtMovement : MonoBehaviour
     {
         // Since boat faces Left by default:
         // Flip is true if moving Right, false if moving Left
-        _spriteRenderer.flipX = (_currentDirection == MoveDirection.Right);
+        float xRotation = (_currentDirection == MoveDirection.Right) ? -1f : 1f;
+        transform.localScale = new Vector3(xRotation, 1f, 1f);
     }
 }

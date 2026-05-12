@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFlipped;
     private float _initialScale;
     private Coroutine _shakeCoroutine;
+    private bool IsStunned => Time.time < _stunTimer;
 
     public bool IsSurging => _isSurging;
 
@@ -54,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         _shakeCoroutine = StartCoroutine(ShakeSprite(duration));
     }
 
-    private System.Collections.IEnumerator ShakeSprite(float duration)
+    private IEnumerator ShakeSprite(float duration)
     {
         float elapsed = 0f;
         float shakeIntensity = 15f;
@@ -123,33 +125,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time < _stunTimer) return;
-
-        if (transform.position.y <= _waterLevel)
+        // Handle environmental physics (Water vs Air)
+        if (IsUnderWater())
         {
-            // Transition from Air to Water
             if (_rigidbody.gravityScale != 0)
             {
+                // Transition logic
                 _smoothMovementInput = new Vector2(_rigidbody.linearVelocity.x / _speed, _divePull / _speed);
                 _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, _divePull);
                 if (transform.position.y + _orcaHeight * 2 < _waterLevel) _rigidbody.gravityScale = 0;
-                return;
             }
-
-            // Gamepad/Classic Movement
-            _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
-            _rigidbody.linearVelocity = _smoothMovementInput * _speed;
+            else
+            {
+                // Only apply movement if NOT stunned
+                if (!IsStunned)
+                {
+                    _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
+                    _rigidbody.linearVelocity = _smoothMovementInput * _speed;
+                }
+            }
         }
         else
         {
-            // Air Physics
+            // Air Physics - Always apply gravity when in air
             _rigidbody.gravityScale = _gravityInAir;
-            float horizontalVel = _movementInput.x * _speed;
-            _rigidbody.linearVelocity = new Vector2(horizontalVel, _rigidbody.linearVelocity.y);
+
+            // Only allow air-steering if NOT stunned
+            if (!IsStunned)
+            {
+                float horizontalVel = _movementInput.x * _speed;
+                _rigidbody.linearVelocity = new Vector2(horizontalVel, _rigidbody.linearVelocity.y);
+            }
         }
 
         HandleVisuals();
     }
+
+    private bool IsUnderWater() => transform.position.y <= _waterLevel;
 
     public Vector2 GetMovementInput() => _movementInput;
 
