@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WaterBottle2Data
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
   trashName: WatterBottle2
-  visualSprite: {fileID: 0}
+  visualSprite: {fileID: -3801059258731084871, guid: 80cc4e569b779994498dd64c87560f2f, type: 3}
   damageAmount: 10
   sinkSpeed: 2
   rotationSpeed: 20
+  baseScale: 0.3

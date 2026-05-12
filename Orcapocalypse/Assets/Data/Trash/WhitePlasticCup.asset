@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427ad63448ddb8f4eb51df66f3deaf49, type: 3}
   m_Name: WhitePlasticCup
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
-  trashName: 
-  visualSprite: {fileID: 0}
+  trashName: WhitePlasticCup
+  visualSprite: {fileID: 4292584750455129897, guid: abb8c4f27ea68804980fb626a98f4478, type: 3}
   damageAmount: 10
   sinkSpeed: 2
   rotationSpeed: 20
+  baseScale: 0.5

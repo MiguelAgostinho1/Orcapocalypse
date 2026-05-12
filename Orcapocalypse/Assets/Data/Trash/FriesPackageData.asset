@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427ad63448ddb8f4eb51df66f3deaf49, type: 3}
   m_Name: FriesPackageData
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
-  trashName: 
-  visualSprite: {fileID: 0}
+  trashName: FiresPackage
+  visualSprite: {fileID: 5677830192556610669, guid: 9b91a014e8f4625489089a6d21eeeb31, type: 3}
   damageAmount: 10
   sinkSpeed: 2
   rotationSpeed: 20
+  baseScale: 0.3

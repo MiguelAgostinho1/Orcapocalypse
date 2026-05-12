@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427ad63448ddb8f4eb51df66f3deaf49, type: 3}
   m_Name: BananaPeelData
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
-  trashName: 
-  visualSprite: {fileID: 0}
-  damageAmount: 10
+  trashName: BananaPeel
+  visualSprite: {fileID: -6539845494953745017, guid: d433708249905e447beb8c086a95623c, type: 3}
+  damageAmount: 5
   sinkSpeed: 2
   rotationSpeed: 20
+  baseScale: 0.3

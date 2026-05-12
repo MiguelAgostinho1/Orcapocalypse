@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427ad63448ddb8f4eb51df66f3deaf49, type: 3}
   m_Name: PizzaBoxData
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
-  trashName: 
-  visualSprite: {fileID: 0}
-  damageAmount: 10
+  trashName: PizzaBox
+  visualSprite: {fileID: -280068676288132128, guid: 72a58b6867e7f2e46b274ed2e3e741d3, type: 3}
+  damageAmount: 15
   sinkSpeed: 2
   rotationSpeed: 20
+  baseScale: 0.2
