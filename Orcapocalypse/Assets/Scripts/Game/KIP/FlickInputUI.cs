@@ -29,6 +29,11 @@ public class FlickInputUI : MonoBehaviour
     [Header("Ability Settings")]
     public PlayerAbility[] abilityLibrary;
 
+    [Header("Sequence Chamber Settings")]
+    [SerializeField] private float _pendingExecutionDelay = 0.2f; // Window to check for extensions
+    private PlayerAbility _pendingAbility = null;
+    private float _pendingMatchTime;
+
     [Header("Gestures Success Visuals")]
     public Color successColor = Color.cyan;
     public Color normalColor = new Color(74f / 255f, 0f / 255f, 214f / 255f);
@@ -70,6 +75,7 @@ public class FlickInputUI : MonoBehaviour
         }
 
         UpdateGestureTracking();
+        HandlePendingChamber();
 
         // if (activeSector != Sectors.Neutral) Debug.Log($"Angle: {currentAngle:F1} | Sector: {activeSector}");
     }
@@ -123,8 +129,16 @@ public class FlickInputUI : MonoBehaviour
         }
         else if (Time.time - lastInputTime > 0.1f)
         {
-            inputBuffer.Clear();
-            trailLine.Clear();
+            // If they let go of the stick, fire whatever is waiting in the chamber immediately
+            if (_pendingAbility != null)
+            {
+                ExecutePendingAttack(_pendingAbility);
+            }
+            else
+            {
+                inputBuffer.Clear();
+                trailLine.Clear();
+            }
         }
 
         currentSector = activeSector;
@@ -153,30 +167,91 @@ public class FlickInputUI : MonoBehaviour
         trailLine.thickness = trailThickness;
     }
 
+    private void HandlePendingChamber()
+    {
+        if (_pendingAbility == null) return;
+
+        // If the player waits too long without completing a longer gesture, default to the pending one
+        if (Time.time - _pendingMatchTime > _pendingExecutionDelay)
+        {
+            Debug.Log($"Chamber timed out. Executing default move: {_pendingAbility.attackType}");
+            ExecutePendingAttack(_pendingAbility);
+        }
+    }
+
     void CheckForGestures()
     {
         if (Time.time - lastInputTime > gestureTimeout)
         {
             inputBuffer.Clear();
+            _pendingAbility = null;
             return;
         }
 
-        if (abilityLibrary.Length <= 0)
-        {
-            Debug.LogWarning("No gesture patterns defined in the ability library.");
-            return;
-        }
+        if (abilityLibrary.Length <= 0) return;
 
+        PlayerAbility matchedAbility = null;
+
+        // 1. Find if the current buffer matches ANY ability
         foreach (var ability in abilityLibrary)
         {
             if (IsPatternMatched(ability.requiredSequence))
             {
-                ExecuteAttack(ability.attackType, ability.requiredSequence);
-                GamepadHaptics.Instance.VibrateSuccess();
-                inputBuffer.Clear();
+                matchedAbility = ability;
                 break;
             }
         }
+
+        // 2. Evaluate if we should execute or hold it
+        if (matchedAbility != null)
+        {
+            // If this sequence is the baseline for a LONGER move, hold it in the chamber
+            if (IsPrefixOfLongerSequence(matchedAbility.requiredSequence))
+            {
+                _pendingAbility = matchedAbility;
+                _pendingMatchTime = Time.time;
+                Debug.Log($"Holding {matchedAbility.attackType} in chamber... checking for extensions.");
+            }
+            else
+            {
+                // This is already the longest possible move or has no extensions, execute immediately!
+                ExecutePendingAttack(matchedAbility);
+            }
+        }
+    }
+
+    // Checks if the completed short sequence matches the beginning of a longer sequence in the library
+    private bool IsPrefixOfLongerSequence(Sectors[] shortSequence)
+    {
+        foreach (var ability in abilityLibrary)
+        {
+            if (ability.requiredSequence.Length > shortSequence.Length)
+            {
+                bool matchesPrefix = true;
+                for (int i = 0; i < shortSequence.Length; i++)
+                {
+                    if (ability.requiredSequence[i] != shortSequence[i])
+                    {
+                        matchesPrefix = false;
+                        break;
+                    }
+                }
+                if (matchesPrefix) return true; // Found a longer move that starts with this sequence
+            }
+        }
+        return false;
+    }
+
+    // Consolidates the execution and clears all tracking data cleanly
+    private void ExecutePendingAttack(PlayerAbility ability)
+    {
+        ExecuteAttack(ability.attackType, ability.requiredSequence);
+        GamepadHaptics.Instance.VibrateSuccess();
+
+        // Reset inputs entirely
+        inputBuffer.Clear();
+        lastRecordedSector = Sectors.Neutral;
+        _pendingAbility = null;
     }
 
     bool IsPatternMatched(Sectors[] sequence)

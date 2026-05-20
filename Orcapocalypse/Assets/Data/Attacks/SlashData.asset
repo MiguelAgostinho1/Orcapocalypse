@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlashData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
   abilityName: Slash
-  attackType: 1
+  attackType: 2
   requiredSequence: 060000006300000001000000
   force: 20
   cooldown: 1
