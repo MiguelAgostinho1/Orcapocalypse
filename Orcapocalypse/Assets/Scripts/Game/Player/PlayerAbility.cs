@@ -5,8 +5,8 @@ public class PlayerAbility : ScriptableObject
 {
     [Header("Ability Signature")]
     public string abilityName;
-    public FlickInputUI.AttackType attackType;
-    public FlickInputUI.Sectors[] requiredSequence;
+    public GestureParser.AttackType attackType;
+    public GestureParser.Sectors[] requiredSequence;
 
     [Header("Physics")]
     public float damage = 15f;

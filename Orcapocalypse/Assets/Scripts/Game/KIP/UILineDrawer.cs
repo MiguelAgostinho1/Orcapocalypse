@@ -46,7 +46,7 @@ public class UILineDrawer : Graphic
         }
     }
 
-    public void DrawPerfectLine(Sectors[] sequence, float maxRadius, Vector2 finalDir)
+    public void DrawPerfectLine(GestureParser.Sectors[] sequence, float maxRadius, Vector2 finalDir)
     {
         points.Clear();
         showArrow = true;
@@ -96,7 +96,7 @@ public class UILineDrawer : Graphic
     }
 
     // Helper method for DrawPerfectLine
-    private Vector2 GetPosFromSector(Sectors s, float radius)
+    private Vector2 GetPosFromSector(GestureParser.Sectors s, float radius)
     {
         float angle = (int)s * 45f;
         return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * radius;

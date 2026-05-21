@@ -7,7 +7,7 @@ public class PlayerCombat : MonoBehaviour
     private PlayerMovement _movement;
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
-    private Dictionary<FlickInputUI.AttackType, float> _cooldowns = new Dictionary<FlickInputUI.AttackType, float>();
+    private Dictionary<GestureParser.AttackType, float> _cooldowns = new Dictionary<GestureParser.AttackType, float>();
 
     void Awake()
     {
@@ -16,7 +16,7 @@ public class PlayerCombat : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
     }
 
-    public void OnGestureRecognized(FlickInputUI.AttackType type)
+    public void OnGestureRecognized(GestureParser.AttackType type)
     {
         PlayerAbility ability = abilities.Find(a => a.attackType == type);
 
@@ -27,6 +27,6 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    bool IsOffCooldown(FlickInputUI.AttackType type) =>
+    bool IsOffCooldown(GestureParser.AttackType type) =>
         !_cooldowns.ContainsKey(type) || Time.time >= _cooldowns[type];
 }
