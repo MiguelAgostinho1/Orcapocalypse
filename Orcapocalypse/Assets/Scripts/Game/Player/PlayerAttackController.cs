@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,11 +30,11 @@ public class PlayerAttackController : MonoBehaviour
         // Only proceed if it's been long enough since the last hit
         if (Time.time < _nextHitTime) return;
 
-        if (collision.gameObject.TryGetComponent<YachtDestroyController>(out var yachtDeath))
+        if (collision.gameObject.TryGetComponent<YachtDestroyController>(out var yachtDeath) && yachtDeath.IsSinking)
         {
             // If the boat is sinking: Do nothing here. 
             // OnTriggerStay2D will handle the "crushing" damage instead.
-            if (yachtDeath.IsSinking) return;
+            return;
         }
 
         // Check if the orca hit the Yacht
@@ -53,20 +54,24 @@ public class PlayerAttackController : MonoBehaviour
                 boatHealth.TakeDamage(_bumpDamage);
                 _orcaHealth.TakeDamage(_selfDamage);
 
-                // --- 1. Calculate Rebound ---
-                Vector2 hitPoint = collision.GetContact(0).point;
-                Vector2 reboundDir = ((Vector2)transform.position - hitPoint).normalized;
-
-                // --- 2. STUN ORCA ---
-                _playerMovement.Stun(_stunDuration);
-
-                // --- 3. APPLY FORCE ---
-                _rb.linearVelocity = Vector2.zero;
-                _rb.AddForce(reboundDir * _reboundForce, ForceMode2D.Impulse);
-
-                Debug.Log("Orca recoiled and is briefly stunned!");
+                ApplyReboundStun(collision.GetContact(0).point);
             }
         }
+    }
+
+    private void ApplyReboundStun(Vector2 hitPoint)
+    {
+        // --- 1. Calculate Rebound ---
+        Vector2 reboundDir = ((Vector2)transform.position - hitPoint).normalized;
+
+        // --- 2. STUN ORCA ---
+        _playerMovement.Stun(_stunDuration);
+
+        // --- 3. APPLY FORCE ---
+        _rb.linearVelocity = Vector2.zero;
+        _rb.AddForce(reboundDir * _reboundForce, ForceMode2D.Impulse);
+
+        Debug.Log("Orca recoiled and is briefly stunned!");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -94,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleVisuals()
     {
+        if (IsStunned) return;
+
         if (_rigidbody.linearVelocity.magnitude > 0.1f)
         {
             float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
