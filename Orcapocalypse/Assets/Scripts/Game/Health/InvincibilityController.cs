@@ -4,6 +4,7 @@ using UnityEngine;
 public class InvicibilityController : MonoBehaviour
 {
     private HealthController healthController;
+    private Coroutine _invincibilityRoutine;
 
     private void Awake()
     {
@@ -15,8 +16,8 @@ public class InvicibilityController : MonoBehaviour
     public void StartInvincibility(float invincibilityDuration)
     {
         // Stop all coroutines to ensure multiple hits don't cause the invincibility to expire prematurely
-        StopAllCoroutines();
-        StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
+        if (_invincibilityRoutine != null) StopCoroutine(_invincibilityRoutine);
+        _invincibilityRoutine = StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
     }
 
     // Handles the timed transition of the invincibility flag

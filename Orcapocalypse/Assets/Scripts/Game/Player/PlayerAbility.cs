@@ -9,7 +9,7 @@ public class PlayerAbility : ScriptableObject
     public FlickInputUI.Sectors[] requiredSequence;
 
     [Header("Physics")]
-    public float force = 15f;
+    public float damage = 15f;
     public float cooldown = 1f;
 
     [Header("Visuals")]
@@ -25,7 +25,7 @@ public class PlayerAbility : ScriptableObject
         Vector2 dir = movement.GetMovementInput();
         if (dir == Vector2.zero) dir = movement.transform.right;
 
-        rb.linearVelocity = dir * force;
+        rb.linearVelocity = dir * damage;
         movement.ResetSmoothDamp(rb.linearVelocity);
 
         // 3. Trigger the Visuals

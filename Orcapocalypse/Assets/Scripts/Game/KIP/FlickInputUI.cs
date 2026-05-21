@@ -245,7 +245,7 @@ public class FlickInputUI : MonoBehaviour
     // Consolidates the execution and clears all tracking data cleanly
     private void ExecutePendingAttack(PlayerAbility ability)
     {
-        ExecuteAttack(ability.attackType, ability.requiredSequence);
+        ExecuteAttack(ability);
         GamepadHaptics.Instance.VibrateSuccess();
 
         // Reset inputs entirely
@@ -267,26 +267,27 @@ public class FlickInputUI : MonoBehaviour
         return true;
     }
 
-    void ExecuteAttack(AttackType type, Sectors[] sequence)
+    void ExecuteAttack(PlayerAbility ability)
     {
-        Debug.Log($"Exectued {type}");
+        Debug.Log($"Exectued {ability.attackType}");
 
         isShowingSuccess = true;
         successTimer = Time.time;
+
+        GameStateManager.Instance.SetAttackExecuted(ability);
 
         // Visual "Pop"
         trailLine.color = successColor;
 
         // Calculate the Arrow Direction for Visual Feedback
-        Sectors finalSector = sequence[sequence.Length - 1];
+        Sectors finalSector = ability.requiredSequence[ability.requiredSequence.Length - 1];
         Vector2 arrowDirection = GetVectorFromSector(finalSector);
 
         // Draw the "Ideal" version of the move
-        trailLine.DrawPerfectLine(sequence, maxRadius, arrowDirection);
-
+        trailLine.DrawPerfectLine(ability.requiredSequence, maxRadius, arrowDirection);
         if (playerCombat != null)
         {
-            playerCombat.OnGestureRecognized(type);
+            playerCombat.OnGestureRecognized(ability.attackType);
         }
     }
 

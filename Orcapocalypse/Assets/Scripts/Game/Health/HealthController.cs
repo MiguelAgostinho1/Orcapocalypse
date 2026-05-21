@@ -31,7 +31,6 @@ public class HealthController : MonoBehaviour
         // Mathf.Max ensures currentHealth is never a negative number
         currentHealth = Mathf.Max(0, currentHealth - damageAmount);
         OnHealthChanged.Invoke();
-        GamepadHaptics.Instance.VibrateDamage();
 
         if (currentHealth == 0)
         {

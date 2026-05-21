@@ -6,7 +6,7 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField]
     private Image _healthBarForegroundImage;
 
-    public void UpdateHealthBar(HealthController healthController)
+    private void UpdateHealthBar(HealthController healthController)
     {
         _healthBarForegroundImage.fillAmount = healthController.RemainingHealthPercentage;
     }

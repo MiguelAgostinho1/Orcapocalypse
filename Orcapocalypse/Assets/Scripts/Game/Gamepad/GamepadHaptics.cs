@@ -12,7 +12,7 @@ public class GamepadHaptics : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void VibrateDamage()
+    private void VibrateDamage()
     {
         // Strong, short rumble for damage feedback
         StartCoroutine(Rumble(1f, 1f, 0.5f));

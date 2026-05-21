@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerAttackController : MonoBehaviour
 {
     [Header("Damage Settings")]
-    [SerializeField] private float _ramDamage = 20f;
     [SerializeField] private float _bumpDamage = 5f;
     [SerializeField] private float _selfDamage = 10f;
     [SerializeField] private float _hitCooldown = 1f;
@@ -47,7 +46,7 @@ public class PlayerAttackController : MonoBehaviour
 
             if (_playerMovement.IsSurging)
             {
-                boatHealth.TakeDamage(_ramDamage);
+                boatHealth.TakeDamage(GameStateManager.Instance.GetAttackExecuted().damage);
             }
             else
             {

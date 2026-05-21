@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Flip
   attackType: 3
   requiredSequence: 060000000700000000000000010000000200000003000000040000000500000006000000
-  force: 20
+  damage: 20
   cooldown: 1
   surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
   spriteDuration: 0.5
