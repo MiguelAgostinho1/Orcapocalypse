@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public List<PlayerAbility> abilities;
+    public AbilityDatabase abilityDatabase;
     private PlayerMovement _movement;
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
@@ -18,7 +18,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void OnGestureRecognized(GestureParser.AttackType type)
     {
-        PlayerAbility ability = abilities.Find(a => a.attackType == type);
+        PlayerAbility ability = System.Array.Find(abilityDatabase.allAbilities, a => a.attackType == type);
 
         if (ability != null && IsOffCooldown(type))
         {

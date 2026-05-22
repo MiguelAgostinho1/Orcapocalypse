@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 531079724}
   - component: {fileID: 531079723}
   m_Layer: 0
-  m_Name: GameStateManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1352,10 +1352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GestureParser
   innerDeadzone: 0.25
   sectorLeeway: 10
-  abilityLibrary:
-  - {fileID: 11400000, guid: 8683072fa4482454bb9c9cf382d8027c, type: 2}
-  - {fileID: 11400000, guid: f8a27f3803401ae4aa91c46e04562cae, type: 2}
-  - {fileID: 11400000, guid: dab1569a0b8a20b44b8139cf656213f5, type: 2}
+  abilityDatabase: {fileID: 11400000, guid: dcc8ae00b4ce8664daa56270d8d1ea0c, type: 2}
   bufferSize: 15
   gestureTimeout: 0.5
   _pendingExecutionDelay: 0.2
@@ -1692,6 +1689,10 @@ PrefabInstance:
       propertyPath: invincibilityDuration
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5393945220914500425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: abilityDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: dcc8ae00b4ce8664daa56270d8d1ea0c, type: 2}
     - target: {fileID: 5393945220914500425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: abilities.Array.size
       value: 3

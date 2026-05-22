@@ -16,7 +16,7 @@ public class GestureParser : MonoBehaviour
     [Range(0f, 20f)] public float sectorLeeway = 10f;
 
     [Header("Sequence Logic")]
-    public PlayerAbility[] abilityLibrary;
+    public AbilityDatabase abilityDatabase;
     public int bufferSize = 15;
     public float gestureTimeout = 0.5f;
     [SerializeField] private float _pendingExecutionDelay = 0.2f;
@@ -97,10 +97,10 @@ public class GestureParser : MonoBehaviour
             return;
         }
 
-        if (abilityLibrary.Length == 0) return;
+        if (abilityDatabase.allAbilities.Length== 0) return;
 
         PlayerAbility matchedAbility = null;
-        foreach (var ability in abilityLibrary)
+        foreach (var ability in abilityDatabase.allAbilities)
         {
             if (IsPatternMatched(ability.requiredSequence))
             {
@@ -155,7 +155,7 @@ public class GestureParser : MonoBehaviour
 
     private bool IsPrefixOfLongerSequence(Sectors[] shortSequence)
     {
-        foreach (var ability in abilityLibrary)
+        foreach (var ability in abilityDatabase.allAbilities)
         {
             if (ability.requiredSequence.Length > shortSequence.Length)
             {

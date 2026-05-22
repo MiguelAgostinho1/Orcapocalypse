@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc294caf21d4b5b4c876745ae7dd880c, type: 3}
-  m_Name: SlashData
+  m_Name: BonkLData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
-  abilityName: Slash
+  abilityName: Bonk
   attackType: 1
-  requiredSequence: 06000000050000006300000001000000
-  damage: 20
+  requiredSequence: 03000000
+  damage: 5
   cooldown: 1
-  surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
+  surgeSprite: {fileID: 0}
   spriteDuration: 0.5
