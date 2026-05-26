@@ -16,6 +16,8 @@ MonoBehaviour:
   attackType: 1
   requiredSequence: 01000000
   damage: 5
-  cooldown: 1
-  surgeSprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  spriteDuration: 0.5
+  duration: 0.3
+  abilitySprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
+  forceMagnitude: 10
+  physicsBehavior: 0
+  absoluteDirection: {x: 0, y: 0}

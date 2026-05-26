@@ -1284,7 +1284,7 @@ MonoBehaviour:
   successColor: {r: 0, g: 1, b: 1, a: 1}
   normalColor: {r: 0.2901961, g: 0, b: 0.8392157, a: 1}
   trailThickness: 4
-  successDisplayDuration: 1
+  successDisplayDuration: 0.3
 --- !u!114 &1385521700
 MonoBehaviour:
   m_ObjectHideFlags: 0
