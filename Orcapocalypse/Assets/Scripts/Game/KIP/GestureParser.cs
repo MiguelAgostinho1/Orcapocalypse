@@ -102,7 +102,7 @@ public class GestureParser : MonoBehaviour
         PlayerAbility matchedAbility = null;
         foreach (var ability in abilityDatabase.allAbilities)
         {
-            if (IsPatternMatched(ability.requiredSequence))
+            if (IsPatternMatched(ability.GetRequiredSequence()))
             {
                 matchedAbility = ability;
                 break;
@@ -111,7 +111,7 @@ public class GestureParser : MonoBehaviour
 
         if (matchedAbility != null)
         {
-            if (IsPrefixOfLongerSequence(matchedAbility.requiredSequence))
+            if (IsPrefixOfLongerSequence(matchedAbility.GetRequiredSequence()))
             {
                 _pendingAbility = matchedAbility;
                 _pendingMatchTime = Time.time;
@@ -155,14 +155,16 @@ public class GestureParser : MonoBehaviour
 
     private bool IsPrefixOfLongerSequence(Sectors[] shortSequence)
     {
+        Sectors[] requiredSequence;
         foreach (var ability in abilityDatabase.allAbilities)
         {
-            if (ability.requiredSequence.Length > shortSequence.Length)
+            requiredSequence = ability.GetRequiredSequence();
+            if (requiredSequence.Length > shortSequence.Length)
             {
                 bool matchesPrefix = true;
                 for (int i = 0; i < shortSequence.Length; i++)
                 {
-                    if (ability.requiredSequence[i] != shortSequence[i])
+                    if (requiredSequence[i] != shortSequence[i])
                     {
                         matchesPrefix = false;
                         break;

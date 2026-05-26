@@ -106,11 +106,11 @@ public class FlickInputUI : MonoBehaviour
         trailLine.color = successColor;
 
         // Calculate Arrow Direction
-        GestureParser.Sectors finalSector = ability.requiredSequence[ability.requiredSequence.Length - 1];
+        GestureParser.Sectors finalSector = ability.GetRequiredSequence()[^1];
         Vector2 arrowDirection = GetVectorFromSector(finalSector);
 
         // Draw perfect sequence
-        trailLine.DrawPerfectLine(ability.requiredSequence, _maxRadius, arrowDirection);
+        trailLine.DrawPerfectLine(ability.GetRequiredSequence(), _maxRadius, arrowDirection);
 
         // Execute dependencies
         GamepadHaptics.Instance.VibrateSuccess();
@@ -118,7 +118,7 @@ public class FlickInputUI : MonoBehaviour
 
         if (playerCombat != null)
         {
-            playerCombat.OnGestureRecognized(ability.attackType);
+            playerCombat.OnGestureRecognized(ability.GetAttackType(), ability.GetAbilityName());
         }
     }
 

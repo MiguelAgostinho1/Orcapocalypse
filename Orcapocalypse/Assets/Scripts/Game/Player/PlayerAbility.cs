@@ -1,34 +1,76 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ability", menuName = "Player/Ability")]
+[CreateAssetMenu(fileName = "NewAbility", menuName = "Player/PlayerAbility")]
 public class PlayerAbility : ScriptableObject
 {
-    [Header("Ability Signature")]
-    public string abilityName;
-    public GestureParser.AttackType attackType;
-    public GestureParser.Sectors[] requiredSequence;
+    [Header("Ability Settings")]
+    [SerializeField] private string abilityName;
+    [SerializeField] private GestureParser.AttackType attackType;
+    [SerializeField] private GestureParser.Sectors[] requiredSequence;
+    [SerializeField] private int damage = 10;
+    [SerializeField] private float duration = 0.5f;
+    [SerializeField] private Sprite abilitySprite;
 
-    [Header("Physics")]
-    public float damage = 15f;
-    public float cooldown = 1f;
+    [Header("Physics Payload")]
+    [SerializeField] private float forceMagnitude = 15f;
+    
+    public enum PhysicsBehavior { DynamicDash, AbsoluteDirection, KillMomentum }
+    [SerializeField] private PhysicsBehavior physicsBehavior;
 
-    [Header("Visuals")]
-    public Sprite surgeSprite;
-    public float spriteDuration = 0.5f;
+    [SerializeField] private Vector2 absoluteDirection = Vector2.zero; 
 
-    public virtual void Activate(PlayerMovement movement, Rigidbody2D rb, SpriteRenderer sr)
+    public string GetAbilityName() => abilityName;
+    public int GetDamage() => damage;
+
+    public GestureParser.AttackType GetAttackType() => attackType;
+
+    public GestureParser.Sectors[] GetRequiredSequence() => requiredSequence;
+
+    public float GetDuration() => duration;
+
+    public PhysicsBehavior GetPhysicsBehavior() => physicsBehavior;
+    
+    public void Activate(PlayerMovement movement, Rigidbody2D rb, SpriteRenderer sr)
     {
-        // 1. Water Check (so the player doesn't surge through the air)
-        if (movement.transform.position.y > -0.08f) return;
+        if (abilitySprite != null) sr.sprite = abilitySprite; 
 
-        // 2. Default logic for a "Surge" style move
-        Vector2 dir = movement.GetMovementInput();
-        if (dir == Vector2.zero) dir = movement.transform.right;
+        // Pass the movement reference directly to evaluate layout rules dynamically
+        ApplyMovementForce(rb, movement);
+    }
 
-        rb.linearVelocity = dir * damage;
-        movement.ResetSmoothDamp(rb.linearVelocity);
+    private void ApplyMovementForce(Rigidbody2D rb, PlayerMovement movement)
+    {
+        Debug.Log($"Activating {abilityName} with physics behavior: {physicsBehavior}");
+        switch (physicsBehavior)
+        {
+            case PhysicsBehavior.DynamicDash:
+                Debug.Log("Applying Dynamic Dash Force");
+                // 1. Grab where the player is currently steering with the stick
+                Vector2 dashDir = movement.GetMovementInput();
+                
+                // 2. If the stick is neutral, fallback to whichever way the Orca is facing
+                if (dashDir.sqrMagnitude < 0.01f)
+                {
+                    dashDir = movement.GetFacingDirection();
+                }
+                
+                // 3. Launch! (This handles Up, Down, Left, Right, and diagonals)
+                rb.linearVelocity = Vector2.zero; 
+                rb.AddForce(dashDir.normalized * forceMagnitude, ForceMode2D.Impulse);
+                break;
 
-        // 3. Trigger the Visuals
-        movement.SetSurgeVisuals(surgeSprite, spriteDuration);
+            case PhysicsBehavior.AbsoluteDirection:
+                Debug.Log("Applying Absolute Direction Force");
+                // Always goes in a strict inspector-defined direction (e.g. Deep Dive)
+                rb.linearVelocity = Vector2.zero;
+                rb.AddForce(absoluteDirection.normalized * forceMagnitude, ForceMode2D.Impulse);
+                break;
+
+            case PhysicsBehavior.KillMomentum:
+                Debug.Log("Killing Momentum");
+                // STRICTLY stop the character. No forces, no movement.
+                rb.linearVelocity = Vector2.zero;
+                break;
+        }
     }
 }

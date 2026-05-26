@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
@@ -15,6 +14,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private Rigidbody2D _rb;
     private PlayerMovement _playerMovement;
+    private PlayerCombat _playerCombat;
     private HealthController _orcaHealth;
     private float _nextHitTime;
 
@@ -22,35 +22,40 @@ public class PlayerAttackController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
+        _playerCombat = GetComponent<PlayerCombat>();
         _orcaHealth = GetComponent<HealthController>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Only proceed if it's been long enough since the last hit
         if (Time.time < _nextHitTime) return;
 
         if (collision.gameObject.TryGetComponent<YachtDestroyController>(out var yachtDeath) && yachtDeath.IsSinking)
         {
-            // If the boat is sinking: Do nothing here. 
-            // OnTriggerStay2D will handle the "crushing" damage instead.
             return;
         }
 
-        // Check if the orca hit the Yacht
         if (collision.gameObject.CompareTag("Yacht"))
         {
             if (!collision.gameObject.TryGetComponent<HealthController>(out var boatHealth)) return;
 
-            // Set the cooldown here
             _nextHitTime = Time.time + _hitCooldown;
 
-            if (_playerMovement.IsSurging)
+            // Check if PlayerCombat has an active ability running right now
+            PlayerAbility activeMove = _playerCombat.CurrentActiveAbility;
+
+            if (activeMove != null)
             {
-                boatHealth.TakeDamage(GameStateManager.Instance.GetAttackExecuted().damage);
+                // Attack Successful! Use the damage value directly from the asset
+                boatHealth.TakeDamage(activeMove.GetDamage());
+                
+                // OPTIONAL: If a move like "Deep Dive" or "Tail Anchor" shouldn't damage 
+                // boats on contact, a 'isDefensive' bool can be added to PlayerAbility 
+                // and handle a rebound here instead
             }
             else
             {
+                // Standard accidental bump
                 boatHealth.TakeDamage(_bumpDamage);
                 _orcaHealth.TakeDamage(_selfDamage);
 
@@ -61,13 +66,10 @@ public class PlayerAttackController : MonoBehaviour
 
     private void ApplyReboundStun(Vector2 hitPoint)
     {
-        // --- 1. Calculate Rebound ---
         Vector2 reboundDir = ((Vector2)transform.position - hitPoint).normalized;
 
-        // --- 2. STUN ORCA ---
         _playerMovement.Stun(_stunDuration);
 
-        // --- 3. APPLY FORCE ---
         _rb.linearVelocity = Vector2.zero;
         _rb.AddForce(reboundDir * _reboundForce, ForceMode2D.Impulse);
 
@@ -76,15 +78,10 @@ public class PlayerAttackController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if we are touching the sinking wreck
         if (collision.CompareTag("Yacht"))
         {
-            // Damage Orca for being too close to the sinking yacht
             _orcaHealth.TakeDamage(_selfDamage);
-
-            // Small visual feedback for the player to show the siking yacht hurts
             _playerMovement.Stun(0.5f);
-
             Debug.Log("Orca is being scraped by the sinking wreck!");
         }
     }

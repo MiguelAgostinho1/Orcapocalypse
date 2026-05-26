@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
-    [SerializeField] private Sprite _surgeSprite;
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
@@ -21,15 +20,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _smoothMovementInput;
     private Vector2 _movementInputSmoothVelocity;
     private readonly float _divePull = -2f;
-    private float _spriteResetTimer;
-    private bool _isSurging;
     private float _flipTimer;
     private bool _isFlipped;
     private float _initialScale;
     private Coroutine _shakeCoroutine;
     private bool IsStunned => Time.time < _stunTimer;
+    private float _abilityLockTimer;
+    private bool IsAbilityLocked => Time.time < _abilityLockTimer;
 
-    public bool IsSurging => _isSurging;
 
     private float _orcaHeight;
     private float _stunTimer;
@@ -46,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         _smoothMovementInput = Vector2.zero;
         _movementInputSmoothVelocity = Vector2.zero;
 
-        _isSurging = false;
         if (_spriteRenderer != null && _idleSprite != null)
         {
             _spriteRenderer.sprite = _idleSprite;
@@ -54,6 +51,27 @@ public class PlayerMovement : MonoBehaviour
 
         if (_shakeCoroutine != null) StopCoroutine(_shakeCoroutine);
         _shakeCoroutine = StartCoroutine(ShakeSprite(duration));
+    }
+
+    public void LockMovementForAbility(float duration) 
+    {
+        _abilityLockTimer = Time.time + duration;
+        _smoothMovementInput = Vector2.zero; // Clear the joystick buffer
+    }
+
+    public void ResetToIdleVisuals()
+    {
+        if (_spriteRenderer != null && _idleSprite != null && !IsStunned)
+        {
+            _spriteRenderer.sprite = _idleSprite;
+        }
+    }
+
+    public Vector2 GetFacingDirection()
+    {
+        // Since you already perfectly track _isFlipped in your movement script,
+        // we can just use that to know which way the Orca is looking!
+        return _isFlipped ? Vector2.left : Vector2.right;
     }
 
     private IEnumerator ShakeSprite(float duration)
@@ -80,16 +98,6 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.gravityScale = 0;
         _initialScale = transform.localScale.x;
         _orcaHeight = GetComponent<PolygonCollider2D>().bounds.extents.y;
-    }
-
-    private void Update()
-    {
-        // Sprite Reset Handler
-        if (_isSurging && Time.time >= _spriteResetTimer)
-        {
-            _spriteRenderer.sprite = _idleSprite;
-            _isSurging = false;
-        }
     }
 
     private void HandleVisuals()
@@ -140,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 // Only apply movement if NOT stunned
-                if (!IsStunned)
+                if (!IsStunned && !IsAbilityLocked)
                 {
                     _smoothMovementInput = Vector2.SmoothDamp(_smoothMovementInput, _movementInput, ref _movementInputSmoothVelocity, 0.1f);
                     _rigidbody.linearVelocity = _smoothMovementInput * _speed;
@@ -170,16 +178,6 @@ public class PlayerMovement : MonoBehaviour
     public void ResetSmoothDamp(Vector2 newVelocity)
     {
         _smoothMovementInput = newVelocity / _speed;
-    }
-
-    public void SetSurgeVisuals(Sprite attackSprite, float duration)
-    {
-        if (_spriteRenderer != null && attackSprite != null)
-        {
-            _isSurging = true;
-            _spriteRenderer.sprite = attackSprite;
-            _spriteResetTimer = Time.time + duration;
-        }
     }
 
     private void OnMove(InputValue inputValue)
