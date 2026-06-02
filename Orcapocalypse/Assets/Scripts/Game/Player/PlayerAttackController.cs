@@ -48,10 +48,6 @@ public class PlayerAttackController : MonoBehaviour
             {
                 // Attack Successful! Use the damage value directly from the asset
                 boatHealth.TakeDamage(activeMove.GetDamage());
-                
-                // OPTIONAL: If a move like "Deep Dive" or "Tail Anchor" shouldn't damage 
-                // boats on contact, a 'isDefensive' bool can be added to PlayerAbility 
-                // and handle a rebound here instead
             }
             else
             {

@@ -32,6 +32,7 @@ public class PlayerCombat : MonoBehaviour
             if (_activeAbilityCoroutine != null) StopCoroutine(_activeAbilityCoroutine);
 
             // Start the orchestrated ability timeline
+            CurrentActiveAbility = ability;
             _activeAbilityCoroutine = StartCoroutine(ExecuteAbilityRoutine(ability));
             
             _cooldowns[type] = Time.time + ability.GetDuration();
