@@ -49,6 +49,9 @@ TagManager:
   - name: Hazards
     uniqueID: 1522745717
     locked: 0
+  - name: Fish
+    uniqueID: 3706273465
+    locked: 0
   - name: Player
     uniqueID: 4202256685
     locked: 0

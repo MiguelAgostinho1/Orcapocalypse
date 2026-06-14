@@ -1,0 +1,381 @@
+fileFormatVersion: 2
+guid: c64ac2b3026718149bc7ebfd3c761bc0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 98782489858002204
+    second: SChool_0
+  - first:
+      213: 7472965906658549052
+    second: SChool_1
+  - first:
+      213: 543281187464311526
+    second: SChool_2
+  - first:
+      213: -6434181355999820542
+    second: SChool_3
+  - first:
+      213: 6246286221454291254
+    second: SChool_4
+  - first:
+      213: 5891579187535077272
+    second: SChool_5
+  - first:
+      213: 6366646386329617983
+    second: SChool_6
+  - first:
+      213: -8640702532280833778
+    second: SChool_7
+  - first:
+      213: 5188984214827197790
+    second: SChool_8
+  - first:
+      213: 1649049320843942882
+    second: SChool_9
+  - first:
+      213: -6731811385867454865
+    second: SChool_10
+  - first:
+      213: 5299183585939316214
+    second: SChool_11
+  - first:
+      213: 1728426343506102652
+    second: SChool_12
+  - first:
+      213: 6413183153371721486
+    second: SChool_13
+  - first:
+      213: -2111681370445554662
+    second: SChool_14
+  - first:
+      213: -8015633104036372148
+    second: SChool_15
+  - first:
+      213: -3996318228627668391
+    second: SChool_16
+  - first:
+      213: 1540664531866267385
+    second: SChool_17
+  - first:
+      213: 5288737801917416810
+    second: SChool_18
+  - first:
+      213: 7199097409729196027
+    second: SChool_19
+  - first:
+      213: 9084234791324849013
+    second: SChool_20
+  - first:
+      213: -4656712088521091288
+    second: SChool_21
+  - first:
+      213: -10342065064038654
+    second: SChool_22
+  - first:
+      213: -7032102819747688763
+    second: SChool_23
+  - first:
+      213: -7128946396331097496
+    second: SChool_24
+  - first:
+      213: -1869111526451886685
+    second: SChool_25
+  - first:
+      213: 3215290215940073159
+    second: SChool_26
+  - first:
+      213: -5592349722120848141
+    second: SChool_27
+  - first:
+      213: 833278094091223311
+    second: SChool_28
+  - first:
+      213: 6788526744422870658
+    second: SChool_29
+  - first:
+      213: 8174219842553012411
+    second: SChool_30
+  - first:
+      213: -5121106088123116251
+    second: SChool_31
+  - first:
+      213: -6759165442858109103
+    second: SChool_32
+  - first:
+      213: -7949936415674343494
+    second: SChool_33
+  - first:
+      213: 5699269045022900261
+    second: SChool_34
+  - first:
+      213: 7336152032951272152
+    second: SChool_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SChool_0
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 738
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1dc302b622fe5100800000000000000
+      internalID: 98782489858002204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SChool_1
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 537
+        width: 586
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ddcfc06ee45b760800000000000000
+      internalID: 7472965906658549052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SChool_2
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 334
+        width: 613
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e276ff8c5f1a8700800000000000000
+      internalID: 543281187464311526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SChool_3
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 247
+        width: 579
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 205803f752235b6a0800000000000000
+      internalID: -6434181355999820542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SChool_4
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 14
+        width: 595
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 631333369344fa650800000000000000
+      internalID: 6246286221454291254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c3911bbcd95c2a44db233b83e9f5b334
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      SChool_0: 98782489858002204
+      SChool_1: 7472965906658549052
+      SChool_2: 543281187464311526
+      SChool_3: -6434181355999820542
+      SChool_4: 6246286221454291254
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
