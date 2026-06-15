@@ -5,11 +5,9 @@ public class SmallFishSchool : MonoBehaviour
 {
     [Header("Resource Settings")]
     [Tooltip("Total amount of health points this entire school contains.")]
-    [SerializeField] private float totalHealthPool = 100f;
+    [SerializeField] private float totalHealthPool = 25f;
     [Tooltip("Base health points restored per second of traversal.")]
-    [SerializeField] private float baseHealthPerSecond = 15f;
-    [Tooltip("How much the Orca's velocity scales the consumption rate. Higher speed = faster consumption.")]
-    [SerializeField] private float velocityScalingFactor = 0.2f;
+    [SerializeField] private float baseHealthPerSecond = 5f;
 
     [Header("Visual Feedback")]
     [Tooltip("The particle system representing individual fish in the swarm.")]
@@ -50,7 +48,10 @@ public class SmallFishSchool : MonoBehaviour
         {
             // Grab the Rigidbody2D to evaluate traversal velocity vectors
             Rigidbody2D orcaRb = other.GetComponent<Rigidbody2D>();
+            HealthController orcaHc = other.GetComponent<HealthController>();
+
             if (orcaRb == null) return;
+            if (orcaHc == null || orcaHc.isInvincible || orcaHc.RemainingHealthPercentage >= 1f) return;
 
             // Calculate magnitude of movement (supports modern Unity linearVelocity syntax)
             float orcaSpeed = orcaRb.linearVelocity.magnitude;
@@ -62,8 +63,8 @@ public class SmallFishSchool : MonoBehaviour
             {
                 tickTimer = 0f;
 
-                // Compute dynamic tick allocation: base rate scaled up by player speed
-                float dynamicTickAmount = (baseHealthPerSecond * TICK_INTERVAL) * (1f + (orcaSpeed * velocityScalingFactor));
+                // Compute dynamic tick allocation
+                float dynamicTickAmount = (baseHealthPerSecond * TICK_INTERVAL);
 
                 // Clamp tick to avoid consuming more than what remains in the pool
                 dynamicTickAmount = Mathf.Min(dynamicTickAmount, currentHealthPool);
@@ -73,11 +74,7 @@ public class SmallFishSchool : MonoBehaviour
 
                 // Dispense the resource to your Orca's state script
                 // Swap 'PlayerOrcaController' with your actual execution script name if different
-                var orca = other.GetComponent<HealthController>();
-                if (orca != null)
-                {
-                    orca.AddHealth(dynamicTickAmount);
-                }
+                orcaHc.AddHealth(dynamicTickAmount);
 
                 // Play localized consumption visual bursts if assigned
                 if (consumptionBurstParticles != null && orcaSpeed > 1f)
@@ -100,7 +97,7 @@ public class SmallFishSchool : MonoBehaviour
 
         if (remainingRatio <= 0f)
         {
-            // Resource fully spent: halt emission and lock down trigger arrays
+            // Stops emission, but lets the last few survivors swim away
             schoolParticles.Stop();
             schoolCollider.enabled = false;
         }

@@ -145,7 +145,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121480487}
   serializedVersion: 8
-  lengthInSec: 0.5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -220,8 +220,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6
-      minScalar: 5
+      scalar: 3
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -273,8 +273,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -768,7 +768,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 5
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -974,7 +974,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 80
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1080,7 +1080,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -1091,22 +1091,22 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 1
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
           value: 1
-          inSlope: 1
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -1404,7 +1404,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1437,7 +1437,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -6222,9 +6222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81aa583fd27bd74a952877c4d14f160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallFishSchool
-  totalHealthPool: 100
-  baseHealthPerSecond: 15
-  velocityScalingFactor: 0.2
+  totalHealthPool: 10
+  baseHealthPerSecond: 5
   schoolParticles: {fileID: 121480488}
   consumptionBurstParticles: {fileID: 0}
 --- !u!61 &1423015749
@@ -6261,7 +6260,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.1923747, y: -0.55788743}
+  m_Offset: {x: -0.014428616, y: -1.7486918}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6271,7 +6270,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7.0021, y: 3.270025}
+  m_Size: {x: 4.6031723, y: 3.6671195}
   m_EdgeRadius: 0
 --- !u!4 &1423015750
 Transform:
@@ -6802,7 +6801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4092579114908198823, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: invincibilityDuration
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5393945220914500425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: abilityDatabase
@@ -6822,7 +6821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -6830,19 +6833,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[2].m_Target
@@ -6851,19 +6858,23 @@ PrefabInstance:
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1195606320}
+      objectReference: {fileID: 182706507}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 182706507}
+      objectReference: {fileID: 1195606320}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1195606320}
+      objectReference: {fileID: 182706507}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 182706507}
+      objectReference: {fileID: 1195606320}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1195606320}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -6882,11 +6893,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: UpdateHealthBar
+      value: VibrateDamage
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: VibrateDamage
+      value: set_enabled
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -6897,12 +6908,36 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UpdateHealthBar
+      value: VibrateDamage
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: VibrateDamage
+      value: UpdateHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: UpdateHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1195606320}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateHealthBar
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -6910,24 +6945,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: HealthBarUI, Assembly-CSharp
+      value: GamepadHaptics, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: GamepadHaptics, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: HealthBarUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: GamepadHaptics, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: HealthBarUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: HealthBarUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 182706503}
+      objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
       value: 
@@ -6935,18 +6974,30 @@ PrefabInstance:
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 182706503}
+      objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
       value: 
+      objectReference: {fileID: 182706503}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 182706503}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HealthBarUI, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 182706503}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: HealthController, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -6954,11 +7005,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: HealthController, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: HealthController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnDamage.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: HealthController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: HealthController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7884784571220269492, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _flickInput
