@@ -129,14 +129,12 @@ public class GestureParser : MonoBehaviour
         OnAbilityMatched?.Invoke(ability);
 
         _inputBuffer.Clear();
-        _lastRecordedSector = Sectors.Neutral;
         _pendingAbility = null;
     }
 
     private void ClearGesture(bool triggerTimeoutEvent)
     {
         _inputBuffer.Clear();
-        _lastRecordedSector = Sectors.Neutral;
         _pendingAbility = null;
 
         if (triggerTimeoutEvent) OnGestureTimeout?.Invoke();

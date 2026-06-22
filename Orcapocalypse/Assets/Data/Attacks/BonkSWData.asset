@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc294caf21d4b5b4c876745ae7dd880c, type: 3}
+  m_Name: BonkSWData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
+  abilityName: Bonk
+  attackType: 1
+  requiredSequence: 05000000
+  damage: 5
+  duration: 0.3
+  abilitySprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
+  forceMagnitude: 10
+  physicsBehavior: 0
+  absoluteDirection: {x: 0, y: 0}
