@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
   abilityName: Bonk
   attackType: 1
-  requiredSequence: 06000000
+  requiredSequence: 02000000
   damage: 5
   duration: 0.3
   abilitySprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  forceMagnitude: 10
+  forceMagnitude: 15
   physicsBehavior: 0
   absoluteDirection: {x: 0, y: 0}

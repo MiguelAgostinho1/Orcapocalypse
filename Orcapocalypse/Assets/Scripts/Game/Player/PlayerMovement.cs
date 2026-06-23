@@ -14,6 +14,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
 
+    [Header("Level Boundaries")]
+    [Tooltip("The leftmost X coordinate the Orca can travel to.")]
+    [SerializeField] private float _minXBound = -82f;
+    [Tooltip("The rightmost X coordinate the Orca can travel to.")]
+    [SerializeField] private float _maxXBound = 82f;
+    [Tooltip("The bottom ocean floor Y coordinate the Orca cannot pass.")]
+    [SerializeField] private float _minYBound = -40f;
+
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Vector2 _movementInput;
@@ -168,7 +176,52 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        HandleBoundaries();
+
         HandleVisuals();
+    }
+
+    /// <summary>
+    /// Checks level bounds, clamps position, and zeroes velocity vectors when hitting boundaries.
+    /// </summary>
+    private void HandleBoundaries()
+    {
+        Vector2 velocity = _rigidbody.linearVelocity;
+        Vector3 position = transform.position;
+        bool boundaryHit = false;
+
+        // X Axis: Left Boundary
+        if (position.x <= _minXBound && velocity.x < 0f)
+        {
+            position.x = _minXBound;
+            velocity.x = 0f;
+            _smoothMovementInput.x = 0f; // Prevents SmoothDamp from storing backward drift
+            boundaryHit = true;
+        }
+        // X Axis: Right Boundary
+        else if (position.x >= _maxXBound && velocity.x > 0f)
+        {
+            position.x = _maxXBound;
+            velocity.x = 0f;
+            _smoothMovementInput.x = 0f;
+            boundaryHit = true;
+        }
+
+        // Y Axis: Ocean Floor Boundary (Bottom)
+        if (position.y <= _minYBound && velocity.y < 0f)
+        {
+            position.y = _minYBound;
+            velocity.y = 0f;
+            _smoothMovementInput.y = 0f; // Prevents SmoothDamp from sticking down
+            boundaryHit = true;
+        }
+
+        // Apply modifications synchronously if a boundary was crossed
+        if (boundaryHit)
+        {
+            transform.position = position;
+            _rigidbody.linearVelocity = velocity;
+        }
     }
 
     private bool IsUnderWater() => transform.position.y <= _waterLevel;
@@ -183,5 +236,46 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    /// <summary>
+    /// Draws visual boundary lines in the Unity Scene View when the Player is selected.
+    /// </summary>
+    private void OnDrawGizmosSelected()
+    {
+        // Define the vertical height for the wall gizmos (extends well above water level)
+        float topGizmoY = _waterLevel + 15f;
+
+        // --- 1. WALLS & FLOOR (Red) ---
+        Gizmos.color = Color.red;
+
+        // Left Boundary Wall
+        Gizmos.DrawLine(new Vector3(_minXBound, _minYBound, 0f), new Vector3(_minXBound, topGizmoY, 0f));
+
+        // Right Boundary Wall
+        Gizmos.DrawLine(new Vector3(_maxXBound, _minYBound, 0f), new Vector3(_maxXBound, topGizmoY, 0f));
+
+        // Ocean Floor (Spans directly between your left and right walls)
+        Gizmos.DrawLine(new Vector3(_minXBound, _minYBound, 0f), new Vector3(_maxXBound, _minYBound, 0f));
+
+
+        // --- 2. WATER LEVEL (Blue) ---
+        Gizmos.color = Color.cyan;
+
+        // Surface line to show where air physics take over
+        Gizmos.DrawLine(new Vector3(_minXBound, _waterLevel, 0f), new Vector3(_maxXBound, _waterLevel, 0f));
+
+
+        // --- 3. DIRECTIONAL HINTS (Optional) ---
+        // Draws small visual ticks at the player's level pointing inward to show the safe zone
+        Gizmos.color = Color.yellow;
+        float currentY = transform.position.y;
+
+        // Only draw the tracking ticks if the player is within a reasonable vertical range
+        if (currentY > _minYBound && currentY < topGizmoY)
+        {
+            Gizmos.DrawLine(new Vector3(_minXBound, currentY, 0f), new Vector3(_minXBound + 2f, currentY, 0f));
+            Gizmos.DrawLine(new Vector3(_maxXBound, currentY, 0f), new Vector3(_maxXBound - 2f, currentY, 0f));
+        }
     }
 }
