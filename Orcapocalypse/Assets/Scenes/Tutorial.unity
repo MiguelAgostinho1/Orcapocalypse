@@ -345,7 +345,7 @@ Transform:
   m_GameObject: {fileID: 242944356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.58, y: 2.01, z: 0}
+  m_LocalPosition: {x: 1.58, y: 1.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -480,7 +480,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0.00000011920929, y: 0.14099121}
   m_AutoConfigureDistance: 1
-  m_Distance: 4.4019117
+  m_Distance: 5.0917864
   m_MaxDistanceOnly: 0
 --- !u!1 &377028639
 GameObject:
