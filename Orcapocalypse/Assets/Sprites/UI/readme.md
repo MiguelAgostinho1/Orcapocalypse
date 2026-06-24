@@ -1,0 +1,1 @@
+Folder used to store assets realted to Menus, Health Bars, Gesture Prompts, etc.

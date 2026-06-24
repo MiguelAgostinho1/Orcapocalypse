@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float _speed = 8f;
-    [SerializeField] private float _waterLevel = -0.08f;
     [SerializeField] private float _gravityInAir = 20f;
     [SerializeField] private float _flipSpeed = 5f;
     [SerializeField] private float _flipDelay = 0.5f;
@@ -14,13 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
 
-    [Header("Level Boundaries")]
-    [Tooltip("The leftmost X coordinate the Orca can travel to.")]
-    [SerializeField] private float _minXBound = -82f;
-    [Tooltip("The rightmost X coordinate the Orca can travel to.")]
-    [SerializeField] private float _maxXBound = 82f;
-    [Tooltip("The bottom ocean floor Y coordinate the Orca cannot pass.")]
-    [SerializeField] private float _minYBound = -40f;
+    [Header("Environment")]
+    [SerializeField] private OceanConfig _oceanConfig;
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
@@ -151,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
                 // Transition logic
                 _smoothMovementInput = new Vector2(_rigidbody.linearVelocity.x / _speed, _divePull / _speed);
                 _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, _divePull);
-                if (transform.position.y + _orcaHeight * 2 < _waterLevel) _rigidbody.gravityScale = 0;
+                if (transform.position.y + _orcaHeight * 2 < _oceanConfig.waterLevel) _rigidbody.gravityScale = 0;
             }
             else
             {
@@ -191,26 +185,26 @@ public class PlayerMovement : MonoBehaviour
         bool boundaryHit = false;
 
         // X Axis: Left Boundary
-        if (position.x <= _minXBound && velocity.x < 0f)
+        if (position.x <= _oceanConfig.minXBound && velocity.x < 0f)
         {
-            position.x = _minXBound;
+            position.x = _oceanConfig.minXBound;
             velocity.x = 0f;
             _smoothMovementInput.x = 0f; // Prevents SmoothDamp from storing backward drift
             boundaryHit = true;
         }
         // X Axis: Right Boundary
-        else if (position.x >= _maxXBound && velocity.x > 0f)
+        else if (position.x >= _oceanConfig.maxXBound && velocity.x > 0f)
         {
-            position.x = _maxXBound;
+            position.x = _oceanConfig.maxXBound;
             velocity.x = 0f;
             _smoothMovementInput.x = 0f;
             boundaryHit = true;
         }
 
         // Y Axis: Ocean Floor Boundary (Bottom)
-        if (position.y <= _minYBound && velocity.y < 0f)
+        if (position.y <= _oceanConfig.oceanFloorY && velocity.y < 0f)
         {
-            position.y = _minYBound;
+            position.y = _oceanConfig.oceanFloorY;
             velocity.y = 0f;
             _smoothMovementInput.y = 0f; // Prevents SmoothDamp from sticking down
             boundaryHit = true;
@@ -224,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsUnderWater() => transform.position.y <= _waterLevel;
+    private bool IsUnderWater() => transform.position.y <= _oceanConfig.waterLevel;
 
     public Vector2 GetMovementInput() => _movementInput;
 
@@ -244,26 +238,25 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         // Define the vertical height for the wall gizmos (extends well above water level)
-        float topGizmoY = _waterLevel + 15f;
+        float topGizmoY = _oceanConfig.waterLevel + 15f;
 
         // --- 1. WALLS & FLOOR (Red) ---
         Gizmos.color = Color.red;
 
         // Left Boundary Wall
-        Gizmos.DrawLine(new Vector3(_minXBound, _minYBound, 0f), new Vector3(_minXBound, topGizmoY, 0f));
+        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.oceanFloorY, 0f), new Vector3(_oceanConfig.minXBound, topGizmoY, 0f));
 
         // Right Boundary Wall
-        Gizmos.DrawLine(new Vector3(_maxXBound, _minYBound, 0f), new Vector3(_maxXBound, topGizmoY, 0f));
+        Gizmos.DrawLine(new Vector3(_oceanConfig.maxXBound, _oceanConfig.oceanFloorY, 0f), new Vector3(_oceanConfig.maxXBound, topGizmoY, 0f));
 
         // Ocean Floor (Spans directly between your left and right walls)
-        Gizmos.DrawLine(new Vector3(_minXBound, _minYBound, 0f), new Vector3(_maxXBound, _minYBound, 0f));
-
+        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.oceanFloorY, 0f), new Vector3(_oceanConfig.maxXBound, _oceanConfig.oceanFloorY, 0f));
 
         // --- 2. WATER LEVEL (Blue) ---
         Gizmos.color = Color.cyan;
 
         // Surface line to show where air physics take over
-        Gizmos.DrawLine(new Vector3(_minXBound, _waterLevel, 0f), new Vector3(_maxXBound, _waterLevel, 0f));
+        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.waterLevel, 0f), new Vector3(_oceanConfig.maxXBound, _oceanConfig.waterLevel, 0f));
 
 
         // --- 3. DIRECTIONAL HINTS (Optional) ---
@@ -272,10 +265,10 @@ public class PlayerMovement : MonoBehaviour
         float currentY = transform.position.y;
 
         // Only draw the tracking ticks if the player is within a reasonable vertical range
-        if (currentY > _minYBound && currentY < topGizmoY)
+        if (currentY > _oceanConfig.oceanFloorY && currentY < topGizmoY)
         {
-            Gizmos.DrawLine(new Vector3(_minXBound, currentY, 0f), new Vector3(_minXBound + 2f, currentY, 0f));
-            Gizmos.DrawLine(new Vector3(_maxXBound, currentY, 0f), new Vector3(_maxXBound - 2f, currentY, 0f));
+            Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, currentY, 0f), new Vector3(_oceanConfig.minXBound + 2f, currentY, 0f));
+            Gizmos.DrawLine(new Vector3(_oceanConfig.maxXBound, currentY, 0f), new Vector3(_oceanConfig.maxXBound - 2f, currentY, 0f));
         }
     }
 }

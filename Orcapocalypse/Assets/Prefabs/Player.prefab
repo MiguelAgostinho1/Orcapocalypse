@@ -142,11 +142,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _speed: 5
-  _waterLevel: -0.08
   _gravityInAir: 3
   _flipSpeed: 5
   _flipDelay: 0.5
   _idleSprite: {fileID: -1807650363082549093, guid: 4fd7d7d02a290004a886cd56dbe2d204, type: 3}
+  _oceanConfig: {fileID: 11400000, guid: d35553c419e1dc34686f28c70eba05d6, type: 2}
 --- !u!114 &4892696744121923263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ PolygonCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 070f71aaee5320344b98cbfc6e062f11, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

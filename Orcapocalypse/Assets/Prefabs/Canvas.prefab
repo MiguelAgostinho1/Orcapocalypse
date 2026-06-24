@@ -587,8 +587,8 @@ MonoBehaviour:
   sectorLeeway: 10
   abilityDatabase: {fileID: 11400000, guid: dcc8ae00b4ce8664daa56270d8d1ea0c, type: 2}
   bufferSize: 15
-  gestureTimeout: 0.5
-  _pendingExecutionDelay: 0.2
+  gestureTimeout: 1
+  _pendingExecutionDelay: 0.5
 --- !u!1 &6744275903903581737
 GameObject:
   m_ObjectHideFlags: 0
