@@ -12,7 +12,9 @@ public class GestureParser : MonoBehaviour
     public event Action OnGestureTimeout;
 
     [Header("Leeway & Deadzones")]
+    [Tooltip("The minimum joystick distance (0 to 1) required to register an input. Prevents stick drift and accidental micro-movements.")]
     [Range(0f, 0.5f)] public float innerDeadzone = 0.25f;
+    [Tooltip("Adds extra degrees to the active sector's boundaries. Prevents the input from rapidly flickering back and forth if the player holds the stick exactly on the line between two sectors.")]
     [Range(0f, 20f)] public float sectorLeeway = 10f;
 
     [Header("Sequence Logic")]

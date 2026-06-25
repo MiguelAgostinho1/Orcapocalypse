@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4734da162acf34e904c3066be73c60, type: 3}
   m_Name: TutorialOceanConfigData
   m_EditorClassIdentifier: Assembly-CSharp::OceanConfig
-  waterLevel: -1.2
+  waterLevel: 2.7
   minXBound: -13.5
   maxXBound: 13.5
-  oceanFloorY: -6
+  oceanFloorY: -2.1
