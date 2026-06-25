@@ -142,8 +142,8 @@ TextureImporter:
       name: PROP_TutorialBallSmall_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 17
+        x: 14
+        y: 5
         width: 39
         height: 43
       alignment: 0
