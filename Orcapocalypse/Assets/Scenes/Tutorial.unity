@@ -1901,18 +1901,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2000818793383585502, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 070f71aaee5320344b98cbfc6e062f11, type: 2}
-    - target: {fileID: 2583445969629150595, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 2583445969629150595, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.06
-      objectReference: {fileID: 0}
     - target: {fileID: 2583445969629150595, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10488
@@ -1954,53 +1942,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 2137713000}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: set_enabled
-      objectReference: {fileID: 0}
-    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2137713000}
-    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateHealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: OnDied.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: _maxXBound
-      value: 13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: _minXBound
-      value: -13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: _minYBound
-      value: -6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: _waterLevel
-      value: -1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
-      propertyPath: _oceanConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 1f85a5c4e02797e47af36493cbc2ab37, type: 2}
     - target: {fileID: 9076523684601475379, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _gameOverUI
       value: 

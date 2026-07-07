@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
+    [SerializeField] private Animator anim;
 
     [Header("Environment")]
     [SerializeField] private OceanConfig _oceanConfig;
@@ -133,6 +134,14 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, 0, _isFlipped ? 180 : 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 2f);
         }
+    }
+
+    void Update()
+    {
+        float currentSpeed = _rigidbody.linearVelocity.magnitude;
+        anim.SetFloat("Speed", currentSpeed);
+
+        Debug.Log("CurrentSpeed: " + currentSpeed);
     }
 
     private void FixedUpdate()

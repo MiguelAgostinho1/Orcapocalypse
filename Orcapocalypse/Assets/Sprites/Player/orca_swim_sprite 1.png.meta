@@ -1,0 +1,316 @@
+fileFormatVersion: 2
+guid: 0d1d2660ee2c7a14c9a5f122ed3ce4b0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2451329808439682367
+    second: orca_swim_sprite 1_0
+  - first:
+      213: -4379643517557937514
+    second: orca_swim_sprite 1_1
+  - first:
+      213: -117747155417678095
+    second: orca_swim_sprite 1_2
+  - first:
+      213: 1170209706228370625
+    second: orca_swim_sprite 1_3
+  - first:
+      213: -496789763897624491
+    second: orca_swim_sprite 1_4
+  - first:
+      213: 2890014859116286922
+    second: orca_swim_sprite 1_5
+  - first:
+      213: -4899721902309019746
+    second: orca_swim_sprite 1_6
+  - first:
+      213: 5447717608549232638
+    second: orca_swim_sprite 1_7
+  - first:
+      213: 7631958697726467299
+    second: orca_swim_sprite 1_8
+  - first:
+      213: 8414984517341593123
+    second: orca_swim_sprite 1_9
+  - first:
+      213: 1132306148454604730
+    second: orca_swim_sprite 1_10
+  - first:
+      213: 4782463464151841854
+    second: orca_swim_sprite 1_11
+  - first:
+      213: 3466787800908394994
+    second: orca_swim_sprite 1_12
+  - first:
+      213: -8974731696760593508
+    second: orca_swim_sprite 1_13
+  - first:
+      213: 6805102329225418753
+    second: orca_swim_sprite 1_14
+  - first:
+      213: 5780245700593845026
+    second: orca_swim_sprite 1_15
+  - first:
+      213: 8982922677615841111
+    second: orca_swim_sprite 1_16
+  - first:
+      213: -4332521798402906869
+    second: orca_swim_sprite 1_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: orca_swim_sprite 1_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 113
+        width: 849
+        height: 363
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ca50a4e6802bfdd0800000000000000
+      internalID: -2451329808439682367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orca_swim_sprite 1_3
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 99
+        width: 746
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ccc47c178b6d3010800000000000000
+      internalID: 1170209706228370625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orca_swim_sprite 1_4
+      rect:
+        serializedVersion: 2
+        x: 1964
+        y: 42
+        width: 776
+        height: 434
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 558f4d2875c0b19f0800000000000000
+      internalID: -496789763897624491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orca_swim_sprite 1_7
+      rect:
+        serializedVersion: 2
+        x: 2923
+        y: 99
+        width: 746
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effa73e3d4e2a9b40800000000000000
+      internalID: 5447717608549232638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e1b7168a0ed649f4db721393e0ec5933
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      orca_swim_sprite 1_0: -2451329808439682367
+      orca_swim_sprite 1_1: -4379643517557937514
+      orca_swim_sprite 1_10: 1132306148454604730
+      orca_swim_sprite 1_11: 4782463464151841854
+      orca_swim_sprite 1_12: 3466787800908394994
+      orca_swim_sprite 1_13: -8974731696760593508
+      orca_swim_sprite 1_14: 6805102329225418753
+      orca_swim_sprite 1_15: 5780245700593845026
+      orca_swim_sprite 1_16: 8982922677615841111
+      orca_swim_sprite 1_17: -4332521798402906869
+      orca_swim_sprite 1_2: -117747155417678095
+      orca_swim_sprite 1_3: 1170209706228370625
+      orca_swim_sprite 1_4: -496789763897624491
+      orca_swim_sprite 1_5: 2890014859116286922
+      orca_swim_sprite 1_6: -4899721902309019746
+      orca_swim_sprite 1_7: 5447717608549232638
+      orca_swim_sprite 1_8: 7631958697726467299
+      orca_swim_sprite 1_9: 8414984517341593123
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
