@@ -49,6 +49,9 @@ TagManager:
   - name: Midground
     uniqueID: 2590330489
     locked: 0
+  - name: Props
+    uniqueID: 868809761
+    locked: 0
   - name: Hazards
     uniqueID: 1522745717
     locked: 0

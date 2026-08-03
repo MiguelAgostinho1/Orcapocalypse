@@ -140,8 +140,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float currentSpeed = _rigidbody.linearVelocity.magnitude;
         anim.SetFloat("Speed", currentSpeed);
-
-        Debug.Log("CurrentSpeed: " + currentSpeed);
     }
 
     private void FixedUpdate()
@@ -253,13 +251,16 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
 
         // Left Boundary Wall
-        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.oceanFloorY, 0f), new Vector3(_oceanConfig.minXBound, topGizmoY, 0f));
+        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.oceanFloorY, _oceanConfig.TopYBound), new Vector3(_oceanConfig.minXBound, _oceanConfig.TopYBound, _oceanConfig.TopYBound));
 
         // Right Boundary Wall
-        Gizmos.DrawLine(new Vector3(_oceanConfig.maxXBound, _oceanConfig.oceanFloorY, 0f), new Vector3(_oceanConfig.maxXBound, topGizmoY, 0f));
+        Gizmos.DrawLine(new Vector3(_oceanConfig.maxXBound, _oceanConfig.oceanFloorY, _oceanConfig.TopYBound), new Vector3(_oceanConfig.maxXBound, _oceanConfig.TopYBound, _oceanConfig.TopYBound));
+
+        // Top Boundary Wall (Spans directly between your left and right walls)
+        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.TopYBound, _oceanConfig.TopYBound), new Vector3(_oceanConfig.maxXBound, _oceanConfig.TopYBound, _oceanConfig.TopYBound));
 
         // Ocean Floor (Spans directly between your left and right walls)
-        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.oceanFloorY, 0f), new Vector3(_oceanConfig.maxXBound, _oceanConfig.oceanFloorY, 0f));
+        Gizmos.DrawLine(new Vector3(_oceanConfig.minXBound, _oceanConfig.oceanFloorY, _oceanConfig.TopYBound), new Vector3(_oceanConfig.maxXBound, _oceanConfig.oceanFloorY, _oceanConfig.TopYBound));
 
         // --- 2. WATER LEVEL (Blue) ---
         Gizmos.color = Color.cyan;
