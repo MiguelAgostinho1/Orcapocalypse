@@ -32,8 +32,8 @@ public class DialogManager : MonoBehaviour
     public int charsPerBlip = 2; // Plays a sound every 2 characters so it isn't deafening
 
     private Queue<DialogLine> linesQueue;
-    private bool isTyping = false;
-    private bool isDialogOpen = false;
+    private bool _isTyping = false;
+    private bool _isDialogOpen = false;
 
     private void Awake()
     {
@@ -55,14 +55,14 @@ public class DialogManager : MonoBehaviour
     private void Update()
     {
         // If the dialog is not open, do nothing
-        if (!isDialogOpen) return;
+        if (!_isDialogOpen) return;
 
         // Check for the "South" Button press. 
         // "Submit" is mapped to the South Button (A on Xbox, Cross on PS) in Unity's old Input Manager by default.
         // If you are using the New Input System, you will replace this line with your specific input call.
         if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
-            if (isTyping)
+            if (_isTyping)
             {
                 // Optional: We can ignore input while typing so they can't skip, 
                 // OR we could force the text to finish instantly here.
@@ -79,7 +79,7 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(DialogSequence sequence)
     {
-        isDialogOpen = true;
+        _isDialogOpen = true;
         dialogPanel.SetActive(true);
         linesQueue.Clear();
 
@@ -167,7 +167,7 @@ public class DialogManager : MonoBehaviour
 
     private IEnumerator TypeSentence(DialogLine line)
     {
-        isTyping = true;
+        _isTyping = true;
         if (continuePromptImage != null) continuePromptImage.gameObject.SetActive(false); // Hide prompt while typing
 
         dialogText.text = "";
@@ -187,7 +187,7 @@ public class DialogManager : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        isTyping = false;
+        _isTyping = false;
 
         // Sentence is done! Detect the controller and show the prompt
         UpdatePromptIcon();
@@ -196,7 +196,7 @@ public class DialogManager : MonoBehaviour
 
     private void EndDialog()
     {
-        isDialogOpen = false;
+        _isDialogOpen = false;
         dialogPanel.SetActive(false);
     }
 }

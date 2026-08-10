@@ -7,12 +7,12 @@ public class TutorialBall : MonoBehaviour
     public float slackAmount = 1.5f; // How much it droops
     public int resolution = 15; // How many segments make up the line
 
-    private LineRenderer lineRenderer;
+    private LineRenderer _lineRenderer;
 
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = resolution;
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.positionCount = resolution;
     }
 
     void Update()
@@ -34,7 +34,7 @@ public class TutorialBall : MonoBehaviour
         {
             float t = i / (float)(resolution - 1);
             Vector3 position = CalculateQuadraticBezierPoint(t, startPoint.position, midPoint, endPoint.position);
-            lineRenderer.SetPosition(i, position);
+            _lineRenderer.SetPosition(i, position);
         }
     }
 

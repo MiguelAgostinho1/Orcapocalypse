@@ -1,1 +1,0 @@
-Folder used to store assets realted to Coast Guard boats

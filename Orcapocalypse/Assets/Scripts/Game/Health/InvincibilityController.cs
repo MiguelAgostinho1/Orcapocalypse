@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class InvicibilityController : MonoBehaviour
 {
-    private HealthController healthController;
+    private HealthController _healthController;
     private Coroutine _invincibilityRoutine;
 
     private void Awake()
     {
-        healthController = GetComponent<HealthController>();
+        _healthController = GetComponent<HealthController>();
     }
 
     // Public method to trigger the invincibility state
@@ -23,9 +23,9 @@ public class InvicibilityController : MonoBehaviour
     // Handles the timed transition of the invincibility flag
     private IEnumerator InvincibilityCoroutine(float invincibilityDuration)
     {
-        healthController.isInvincible = true;
+        _healthController.isInvincible = true;
         yield return new WaitForSeconds(invincibilityDuration);
-        healthController.isInvincible = false;
+        _healthController.isInvincible = false;
     }
 
 }

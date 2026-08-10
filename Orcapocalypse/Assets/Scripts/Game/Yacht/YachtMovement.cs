@@ -16,7 +16,6 @@ public class YachtMovement : MonoBehaviour
     [SerializeField] private float _patrolRange = 20f;
 
     private Rigidbody2D _rb;
-    private SpriteRenderer _spriteRenderer;
     private float _startYSettle;
     private float _timer;
     private float _minX, _maxX;
@@ -24,7 +23,6 @@ public class YachtMovement : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _startYSettle = transform.position.y;
 
         // Calculate patrol boundaries based on initial position and patrol range

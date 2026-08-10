@@ -4,27 +4,27 @@ public class Salmon : Fish
 {
     [Header("Salmon Specific Wander Settings")]
     [Tooltip("How often the salmon picks a new random direction to swim while idling.")]
-    [SerializeField] private float wanderInterval = 3f;
+    [SerializeField] private float _wanderInterval = 3f;
     [Tooltip("Adds random variety to the wander interval so all salmon don't turn at the exact same time.")]
-    [SerializeField] private float wanderVariance = 1f;
+    [SerializeField] private float _wanderVariance = 1f;
 
     [Header("Tank Stats")]
     [Tooltip("Total health pool of this heavy salmon variety.")]
-    [SerializeField] private float maxHealth = 40f;
+    [SerializeField] private float _maxHealth = 40f;
     [Tooltip("The time (in seconds) the salmon remains immune to damage after being hit once. Prevents multi-frame instant kills.")]
-    [SerializeField] private float damageGraceWindow = 0.4f;
+    [SerializeField] private float _damageGraceWindow = 0.4f;
 
-    private float currentHealth;
-    private float currentWanderTimer;
-    private float nextWanderInterval;
-    private float gracePeriodTimer;
+    private float _currentHealth;
+    private float _currentWanderTimer;
+    private float _nextWanderInterval;
+    private float _gracePeriodTimer;
 
     /// <summary>
     /// Overrides the base initialization hook to set up custom wander timing.
     /// </summary>
     protected override void InitializeFish()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
         SetNextWanderTime();
         // Give the salmon an immediate random starting direction so they don't all look identical on spawn
         PickRandomWanderDirection();
@@ -36,9 +36,9 @@ public class Salmon : Fish
     protected override void HandleStateUpdate()
     {
         // Tick down the damage grace window timer if active
-        if (gracePeriodTimer > 0f)
+        if (_gracePeriodTimer > 0f)
         {
-            gracePeriodTimer -= Time.deltaTime;
+            _gracePeriodTimer -= Time.deltaTime;
         }
 
         switch (currentState)
@@ -58,11 +58,11 @@ public class Salmon : Fish
     /// </summary>
     private void HandleWanderBehavior()
     {
-        currentWanderTimer += Time.deltaTime;
+        _currentWanderTimer += Time.deltaTime;
 
-        if (currentWanderTimer >= nextWanderInterval)
+        if (_currentWanderTimer >= _nextWanderInterval)
         {
-            currentWanderTimer = 0f;
+            _currentWanderTimer = 0f;
             SetNextWanderTime();
             PickRandomWanderDirection();
         }
@@ -105,7 +105,7 @@ public class Salmon : Fish
     /// </summary>
     protected override void OnFleeEnd()
     {
-        currentWanderTimer = 0f;
+        _currentWanderTimer = 0f;
         SetNextWanderTime();
         PickRandomWanderDirection();
     }
@@ -119,7 +119,7 @@ public class Salmon : Fish
     {
         if (other.CompareTag("Player"))
         {
-            if (gracePeriodTimer > 0f)
+            if (_gracePeriodTimer > 0f)
             {
                 Debug.Log($"{gameObject.name} is temporarily immune to damage during grace period frames.");
                 return;
@@ -146,17 +146,17 @@ public class Salmon : Fish
     /// </summary>
     private void ProcessDamage(float damageAmount, HealthController playerHealth)
     {
-        currentHealth -= damageAmount;
-        Debug.Log($"{gameObject.name} tanked a hit! Spent {damageAmount} HP. Remaining: {currentHealth}/{maxHealth}");
+        _currentHealth -= damageAmount;
+        Debug.Log($"{gameObject.name} tanked a hit! Spent {damageAmount} HP. Remaining: {_currentHealth}/{_maxHealth}");
 
-        if (currentHealth <= 0f)
+        if (_currentHealth <= 0f)
         {
             Debug.Log($"{gameObject.name} health depleted. Consumed!");
             OnEaten(playerHealth); // Safely trigger standard base depletion/destruction sequences
         }
         else
         {
-            gracePeriodTimer = damageGraceWindow;
+            _gracePeriodTimer = _damageGraceWindow;
 
             // Force the salmon to immediately flip direction and start fleeing if it wasn't already
             HandleEscapeBehavior();
@@ -174,6 +174,6 @@ public class Salmon : Fish
     private void SetNextWanderTime()
     {
         // Distorts the interval slightly so multiple salmon look naturally unsynchronized
-        nextWanderInterval = wanderInterval + Random.Range(-wanderVariance, wanderVariance);
+        _nextWanderInterval = _wanderInterval + Random.Range(-_wanderVariance, _wanderVariance);
     }
 }

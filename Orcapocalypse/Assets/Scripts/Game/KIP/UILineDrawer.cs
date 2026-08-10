@@ -8,51 +8,51 @@ public class UILineDrawer : Graphic
 {
     public float thickness = 3f;
     public float arrowSize = 10f;
-    private List<Vector2> points = new List<Vector2>();
-    private Vector2 arrowDirection = Vector2.zero;
-    private bool showArrow = false;
+    private List<Vector2> _points = new List<Vector2>();
+    private Vector2 _arrowDirection = Vector2.zero;
+    private bool _showArrow = false;
 
     // This override is what actually draws the shape on the UI Canvas
     protected override void OnPopulateMesh(VertexHelper vh)
     {
         vh.Clear();
-        if (points.Count < 2) return;
+        if (_points.Count < 2) return;
 
-        for (int i = 0; i < points.Count - 1; i++)
+        for (int i = 0; i < _points.Count - 1; i++)
         {
             // Draw the straight rectangle
-            DrawLineSegment(points[i], points[i + 1], vh);
+            DrawLineSegment(_points[i], _points[i + 1], vh);
 
             // Draw a patch at the connection point to cover the gap
-            if (i < points.Count - 2)
+            if (i < _points.Count - 2)
             {
-                DrawJoint(points[i + 1], vh);
+                DrawJoint(_points[i + 1], vh);
             }
         }
 
-        DrawJoint(points[0], vh);
+        DrawJoint(_points[0], vh);
 
         // If we are showing a success "Perfect Line", draw the arrowhead at the end
-        if (showArrow && arrowDirection != Vector2.zero)
+        if (_showArrow && _arrowDirection != Vector2.zero)
         {
-            Vector2 finalPoint = points[points.Count - 1];
-            Vector2 visualTip = finalPoint + (arrowDirection * (arrowSize * 0.8f));
+            Vector2 finalPoint = _points[_points.Count - 1];
+            Vector2 visualTip = finalPoint + (_arrowDirection * (arrowSize * 0.8f));
 
-            DrawArrowHead(visualTip, arrowDirection, vh);
+            DrawArrowHead(visualTip, _arrowDirection, vh);
         }
         else
         {
-            DrawJoint(points[points.Count - 1], vh);
+            DrawJoint(_points[_points.Count - 1], vh);
         }
     }
 
     public void DrawPerfectLine(GestureParser.Sectors[] sequence, float maxRadius, Vector2 finalDir)
     {
-        points.Clear();
-        showArrow = true;
+        _points.Clear();
+        _showArrow = true;
 
         // 1. Start at Center
-        points.Add(Vector2.zero);
+        _points.Add(Vector2.zero);
 
         // Flip curveOffset to negative for Right-leaning curve
         float curveOffset = -maxRadius * 0.4f;
@@ -62,7 +62,7 @@ public class UILineDrawer : Graphic
         Vector2 endPos = GetPosFromSector(sequence[sequence.Length - 1], maxRadius);
 
         // 2. Add the straight pull-back
-        points.Add(startPos);
+        _points.Add(startPos);
 
         // 3. Draw the Curved Up-swing with higher resolution
         int curveResolution = 8;
@@ -80,15 +80,15 @@ public class UILineDrawer : Graphic
                 // Tilt Calculation
                 // Calculate direction from the previous point to the last point
                 // This ensures the arrow tilts with the curve
-                Vector2 lastDir = (offsetPoint - points[points.Count - 1]).normalized;
-                arrowDirection = lastDir;
+                Vector2 lastDir = (offsetPoint - _points[_points.Count - 1]).normalized;
+                _arrowDirection = lastDir;
 
                 // Clip for the arrow head
-                points.Add(offsetPoint - (lastDir * (arrowSize * 0.8f)));
+                _points.Add(offsetPoint - (lastDir * (arrowSize * 0.8f)));
             }
             else
             {
-                points.Add(offsetPoint);
+                _points.Add(offsetPoint);
             }
         }
 
@@ -155,25 +155,25 @@ public class UILineDrawer : Graphic
 
     public void AddPoint(Vector2 point)
     {
-        if (showArrow)
+        if (_showArrow)
         {
-            showArrow = false;
-            arrowDirection = Vector2.zero;
-            points.Clear();
+            _showArrow = false;
+            _arrowDirection = Vector2.zero;
+            _points.Clear();
         }
 
-        if (points.Count == 0 || Vector2.Distance(points[points.Count - 1], point) > 2f)
+        if (_points.Count == 0 || Vector2.Distance(_points[_points.Count - 1], point) > 2f)
         {
-            points.Add(point);
+            _points.Add(point);
             SetAllDirty();
         }
     }
 
     public void Clear()
     {
-        showArrow = false;
-        arrowDirection = Vector2.zero;
-        points.Clear();
+        _showArrow = false;
+        _arrowDirection = Vector2.zero;
+        _points.Clear();
         SetAllDirty();
     }
 }

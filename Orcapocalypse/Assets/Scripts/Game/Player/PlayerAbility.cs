@@ -4,35 +4,35 @@ using UnityEngine;
 public class PlayerAbility : ScriptableObject
 {
     [Header("Ability Settings")]
-    [SerializeField] private string abilityName;
-    [SerializeField] private GestureParser.AttackType attackType;
-    [SerializeField] private GestureParser.Sectors[] requiredSequence;
-    [SerializeField] private int damage = 10;
-    [SerializeField] private float duration = 0.5f;
-    [SerializeField] private Sprite abilitySprite;
+    [SerializeField] private string _abilityName;
+    [SerializeField] private GestureParser.AttackType _attackType;
+    [SerializeField] private GestureParser.Sectors[] _requiredSequence;
+    [SerializeField] private int _damage = 10;
+    [SerializeField] private float _duration = 0.5f;
+    [SerializeField] private Sprite _abilitySprite;
 
     [Header("Physics Payload")]
-    [SerializeField] private float forceMagnitude = 15f;
+    [SerializeField] private float _forceMagnitude = 15f;
     
     public enum PhysicsBehavior { DynamicDash, AbsoluteDirection, KillMomentum }
-    [SerializeField] private PhysicsBehavior physicsBehavior;
+    [SerializeField] private PhysicsBehavior _physicsBehavior;
 
-    [SerializeField] private Vector2 absoluteDirection = Vector2.zero; 
+    [SerializeField] private Vector2 _absoluteDirection = Vector2.zero; 
 
-    public string GetAbilityName() => abilityName;
-    public int GetDamage() => damage;
+    public string GetAbilityName() => _abilityName;
+    public int GetDamage() => _damage;
 
-    public GestureParser.AttackType GetAttackType() => attackType;
+    public GestureParser.AttackType GetAttackType() => _attackType;
 
-    public GestureParser.Sectors[] GetRequiredSequence() => requiredSequence;
+    public GestureParser.Sectors[] GetRequiredSequence() => _requiredSequence;
 
-    public float GetDuration() => duration;
+    public float GetDuration() => _duration;
 
-    public PhysicsBehavior GetPhysicsBehavior() => physicsBehavior;
+    public PhysicsBehavior GetPhysicsBehavior() => _physicsBehavior;
     
     public void Activate(PlayerMovement movement, Rigidbody2D rb, SpriteRenderer sr)
     {
-        if (abilitySprite != null) sr.sprite = abilitySprite; 
+        if (_abilitySprite != null) sr.sprite = _abilitySprite; 
 
         // Pass the movement reference directly to evaluate layout rules dynamically
         ApplyMovementForce(rb, movement);
@@ -40,8 +40,8 @@ public class PlayerAbility : ScriptableObject
 
     private void ApplyMovementForce(Rigidbody2D rb, PlayerMovement movement)
     {
-        Debug.Log($"Activating {abilityName} with physics behavior: {physicsBehavior}");
-        switch (physicsBehavior)
+        Debug.Log($"Activating {_abilityName} with physics behavior: {_physicsBehavior}");
+        switch (_physicsBehavior)
         {
             case PhysicsBehavior.DynamicDash:
                 Debug.Log("Applying Dynamic Dash Force");
@@ -56,14 +56,14 @@ public class PlayerAbility : ScriptableObject
                 
                 // 3. Launch! (This handles Up, Down, Left, Right, and diagonals)
                 rb.linearVelocity = Vector2.zero; 
-                rb.AddForce(dashDir.normalized * forceMagnitude, ForceMode2D.Impulse);
+                rb.AddForce(dashDir.normalized * _forceMagnitude, ForceMode2D.Impulse);
                 break;
 
             case PhysicsBehavior.AbsoluteDirection:
                 Debug.Log("Applying Absolute Direction Force");
                 // Always goes in a strict inspector-defined direction (e.g. Deep Dive)
                 rb.linearVelocity = Vector2.zero;
-                rb.AddForce(absoluteDirection.normalized * forceMagnitude, ForceMode2D.Impulse);
+                rb.AddForce(_absoluteDirection.normalized * _forceMagnitude, ForceMode2D.Impulse);
                 break;
 
             case PhysicsBehavior.KillMomentum:

@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
-    [SerializeField] private Animator anim;
+    [SerializeField] private Animator _anim;
 
     [Header("Environment")]
     [SerializeField] private OceanConfig _oceanConfig;
@@ -27,13 +27,13 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFlipped;
     private float _initialScale;
     private Coroutine _shakeCoroutine;
-    private bool IsStunned => Time.time < _stunTimer;
-    private float _abilityLockTimer;
-    private bool IsAbilityLocked => Time.time < _abilityLockTimer;
-
-
     private float _orcaHeight;
     private float _stunTimer;
+    private float _abilityLockTimer;
+
+    // Properties to check if the player is currently stunned or if their abilities are locked
+    private bool IsStunned => Time.time < _stunTimer;
+    private bool IsAbilityLocked => Time.time < _abilityLockTimer;
 
     public void Stun(float duration)
     {
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float currentSpeed = _rigidbody.linearVelocity.magnitude;
-        anim.SetFloat("Speed", currentSpeed);
+        _anim.SetFloat("Speed", currentSpeed);
     }
 
     private void FixedUpdate()

@@ -5,12 +5,12 @@ using static UnityEngine.Rendering.STP;
 public class OceanThemeController : MonoBehaviour
 {
     [Header("Level Configuration")]
-    [SerializeField] private OceanConfig oceanConfig;
-    [SerializeField] private Renderer backgroundQuadRenderer;
+    [SerializeField] private OceanConfig _oceanConfig;
+    [SerializeField] private Renderer _backgroundQuadRenderer;
 
     [Header("Seabed Renderers")]
-    [SerializeField] private SpriteRenderer frontSeabedRenderer;
-    [SerializeField] private SpriteRenderer backSeabedRenderer;
+    [SerializeField] private SpriteRenderer _frontSeabedRenderer;
+    [SerializeField] private SpriteRenderer _backSeabedRenderer;
 
     private static readonly int SeaDeepColorID = Shader.PropertyToID("_SeaDeepColor");
     private static readonly int SeaMidColorID = Shader.PropertyToID("_SeaMidColor");
@@ -40,29 +40,29 @@ public class OceanThemeController : MonoBehaviour
 
     public void ApplyTheme()
     {
-        if (oceanConfig == null || backgroundQuadRenderer == null) return;
+        if (_oceanConfig == null || _backgroundQuadRenderer == null) return;
 
         // 3. Use sharedMaterial in Edit Mode to avoid Unity's "material leak" warning
-        Material targetMaterial = Application.isPlaying ? backgroundQuadRenderer.material : backgroundQuadRenderer.sharedMaterial;
+        Material targetMaterial = Application.isPlaying ? _backgroundQuadRenderer.material : _backgroundQuadRenderer.sharedMaterial;
 
         if (targetMaterial == null) return;
 
         // Send colors
-        targetMaterial.SetColor(SkyTopColorID, oceanConfig.skyTopColor);
-        targetMaterial.SetColor(SkyBottomColorID, oceanConfig.skyBottomColor);
-        targetMaterial.SetColor(SeaSurfaceColorID, oceanConfig.seaSurfaceColor);
-        targetMaterial.SetColor(SeaMidColorID, oceanConfig.seaMidColor);
-        targetMaterial.SetColor(SeaDeepColorID, oceanConfig.seaDeepColor);
+        targetMaterial.SetColor(SkyTopColorID, _oceanConfig.skyTopColor);
+        targetMaterial.SetColor(SkyBottomColorID, _oceanConfig.skyBottomColor);
+        targetMaterial.SetColor(SeaSurfaceColorID, _oceanConfig.seaSurfaceColor);
+        targetMaterial.SetColor(SeaMidColorID, _oceanConfig.seaMidColor);
+        targetMaterial.SetColor(SeaDeepColorID, _oceanConfig.seaDeepColor);
 
         // Send bounds
-        targetMaterial.SetFloat(LevelTopYID, oceanConfig.TopYBound);
-        targetMaterial.SetFloat(WaterSurfaceYID, oceanConfig.waterLevel);
-        targetMaterial.SetFloat(LevelBottomYID, oceanConfig.oceanFloorY);
+        targetMaterial.SetFloat(LevelTopYID, _oceanConfig.TopYBound);
+        targetMaterial.SetFloat(WaterSurfaceYID, _oceanConfig.waterLevel);
+        targetMaterial.SetFloat(LevelBottomYID, _oceanConfig.oceanFloorY);
 
         // Seabed Tints
-        if (frontSeabedRenderer != null) frontSeabedRenderer.color = oceanConfig.frontSeabedTint;
-        if (backSeabedRenderer != null) backSeabedRenderer.color = oceanConfig.backSeabedTint;
+        if (_frontSeabedRenderer != null) _frontSeabedRenderer.color = _oceanConfig.frontSeabedTint;
+        if (_backSeabedRenderer != null) _backSeabedRenderer.color = _oceanConfig.backSeabedTint;
 
-        Debug.Log($"Applied Ocean Theme: Surface Y = {oceanConfig.waterLevel}, Sky Top = {oceanConfig.skyTopColor}");
+        Debug.Log($"Applied Ocean Theme: Surface Y = {_oceanConfig.waterLevel}, Sky Top = {_oceanConfig.skyTopColor}");
     }
 }

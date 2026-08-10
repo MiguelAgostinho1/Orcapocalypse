@@ -4,16 +4,16 @@ using UnityEngine.Events;
 public class HealthController : MonoBehaviour
 {
     [SerializeField]
-    private float currentHealth;
+    private float _currentHealth;
     [SerializeField]
-    private float maxHealth;
+    private float _maxHealth;
 
     // Helper Method for UI Health Bar (Useful in the future)
     public float RemainingHealthPercentage
     {
         get
         {
-            return currentHealth / maxHealth;
+            return _currentHealth / _maxHealth;
         }
     }
 
@@ -25,14 +25,14 @@ public class HealthController : MonoBehaviour
     // Handles the damage calculations
     public void TakeDamage(float damageAmount)
     {
-        if (currentHealth <= 0) return;
+        if (_currentHealth <= 0) return;
         if (isInvincible) return;
 
         // Mathf.Max ensures currentHealth is never a negative number
-        currentHealth = Mathf.Max(0, currentHealth - damageAmount);
+        _currentHealth = Mathf.Max(0, _currentHealth - damageAmount);
         OnHealthChanged.Invoke();
 
-        if (currentHealth == 0)
+        if (_currentHealth == 0)
         {
             OnDied.Invoke();
 
@@ -47,10 +47,10 @@ public class HealthController : MonoBehaviour
     // Useful for Power-Ups
     public void AddHealth(float amountToAdd)
     {
-        if (currentHealth >= maxHealth) return;
+        if (_currentHealth >= _maxHealth) return;
 
         // Mathf.Min ensures currentHealth is never bigger than maxHealth
-        currentHealth = Mathf.Min(maxHealth, currentHealth + amountToAdd);
+        _currentHealth = Mathf.Min(_maxHealth, _currentHealth + amountToAdd);
         OnHealthChanged.Invoke();
     }
 }

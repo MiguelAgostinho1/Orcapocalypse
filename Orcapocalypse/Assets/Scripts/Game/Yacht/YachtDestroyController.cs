@@ -12,6 +12,7 @@ public class YachtDestroyController : MonoBehaviour
     private BoxCollider2D _collider;
     private bool _isSinking = false;
 
+    // Public property to check if the yacht is sinking
     public bool IsSinking => _isSinking;
 
     private void Awake()

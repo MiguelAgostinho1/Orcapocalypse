@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 802221157919126494}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TrashSpawnPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5121942481307919976}
   - component: {fileID: 179430228382111533}
   - component: {fileID: 4930497590198170373}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Yacht
   m_TagString: Yacht
   m_Icon: {fileID: 0}

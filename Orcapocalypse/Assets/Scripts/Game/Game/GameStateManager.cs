@@ -6,7 +6,7 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance { get; private set; }
 
     [Header("Combat Configuration")]
-    private PlayerAbility AttackExecuted = null;
+    private PlayerAbility _attackExecuted = null;
 
     private void Awake()
     {
@@ -28,11 +28,11 @@ public class GameStateManager : MonoBehaviour
 
     public void SetAttackExecuted(PlayerAbility ability)
     {
-        AttackExecuted = ability;
+        _attackExecuted = ability;
     }
 
     public PlayerAbility GetAttackExecuted()
     {
-        return AttackExecuted;
+        return _attackExecuted;
     }
 }

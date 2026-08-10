@@ -10,17 +10,17 @@ public class UIBlinker : MonoBehaviour
     [Range(0f, 1f)] public float minAlpha = 0.2f; // How faded it gets (0 = totally invisible)
     [Range(0f, 1f)] public float maxAlpha = 1.0f; // How solid it gets (1 = fully visible)
 
-    private Graphic uiElement;
+    private Graphic _uiElement;
 
     private void Awake()
     {
         // Grab the Image or Text component on this GameObject
-        uiElement = GetComponent<Graphic>();
+        _uiElement = GetComponent<Graphic>();
     }
 
     private void Update()
     {
-        if (uiElement != null)
+        if (_uiElement != null)
         {
             // Use a Sine wave to smoothly transition a number back and forth
             float wave = (Mathf.Sin(Time.time * blinkSpeed) + 1f) / 2f;
@@ -29,9 +29,9 @@ public class UIBlinker : MonoBehaviour
             float currentAlpha = Mathf.Lerp(minAlpha, maxAlpha, wave);
 
             // Set the new color transparency
-            Color newColor = uiElement.color;
+            Color newColor = _uiElement.color;
             newColor.a = currentAlpha;
-            uiElement.color = newColor;
+            _uiElement.color = newColor;
         }
     }
 }
