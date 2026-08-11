@@ -191,7 +191,7 @@ public class Shark : Fish
         // Start with our intended movement direction
         float visualFacingX = moveDirection.x;
 
-        // FIX: If we are trying to flee (Avoidance) but are pinned against a boundary,
+        // If we are trying to flee (Avoidance) but are pinned against a boundary,
         // force the sprite to face the player instead of staring blankly into the wall.
         if (_sharkState == SharkState.Avoidance)
         {
@@ -273,7 +273,7 @@ public class Shark : Fish
                 else
                 {
                     // Punish standard collisions inside the active combat zones
-                    Debug.Log("Orca struck an active defensive shark zone. Dealing damage.");
+                    Debug.Log("Orca struck an active defensive shark zone. Dealing damage. Health: " + health.RemainingHealthPercentage);
                     health.TakeDamage(_damageToPlayer);
                 }
             }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc294caf21d4b5b4c876745ae7dd880c, type: 3}
   m_Name: FlipData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
-  abilityName: Flip
-  attackType: 3
-  requiredSequence: 060000000700000000000000010000000200000003000000040000000500000006000000
-  damage: 25
-  duration: 0.3
-  abilitySprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  forceMagnitude: 20
-  physicsBehavior: 0
-  absoluteDirection: {x: 0, y: 0}
+  _abilityName: Flip
+  _attackType: 3
+  _requiredSequence: 0600000007000000000000000100000002000000030000000400000005000000
+  _damage: 25
+  _duration: 0.3
+  _abilitySprite: {fileID: -496789763897624491, guid: 0d1d2660ee2c7a14c9a5f122ed3ce4b0, type: 3}
+  _forceMagnitude: 20
+  _physicsBehavior: 0
+  _absoluteDirection: {x: 0, y: 0}

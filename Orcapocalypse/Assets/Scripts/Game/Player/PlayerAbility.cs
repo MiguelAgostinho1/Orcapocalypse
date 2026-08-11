@@ -1,23 +1,33 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "NewAbility", menuName = "Player/PlayerAbility")]
 public class PlayerAbility : ScriptableObject
 {
     [Header("Ability Settings")]
-    [SerializeField] private string _abilityName;
-    [SerializeField] private GestureParser.AttackType _attackType;
-    [SerializeField] private GestureParser.Sectors[] _requiredSequence;
-    [SerializeField] private int _damage = 10;
-    [SerializeField] private float _duration = 0.5f;
-    [SerializeField] private Sprite _abilitySprite;
+    [SerializeField]
+    private string _abilityName;
+    [SerializeField]
+    private GestureParser.AttackType _attackType;
+    [SerializeField]
+    private GestureParser.Sectors[] _requiredSequence;
+    [SerializeField]
+    private int _damage = 10;
+    [SerializeField]
+    private float _duration = 0.5f;
+    [SerializeField]
+    private Sprite _abilitySprite;
 
     [Header("Physics Payload")]
-    [SerializeField] private float _forceMagnitude = 15f;
+    [SerializeField]
+    private float _forceMagnitude = 15f;
     
     public enum PhysicsBehavior { DynamicDash, AbsoluteDirection, KillMomentum }
-    [SerializeField] private PhysicsBehavior _physicsBehavior;
+    [SerializeField]
+    private PhysicsBehavior _physicsBehavior;
 
-    [SerializeField] private Vector2 _absoluteDirection = Vector2.zero; 
+    [SerializeField]
+    private Vector2 _absoluteDirection = Vector2.zero; 
 
     public string GetAbilityName() => _abilityName;
     public int GetDamage() => _damage;

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc294caf21d4b5b4c876745ae7dd880c, type: 3}
   m_Name: DeepDiveData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
-  abilityName: Deep Dive
-  attackType: 1
-  requiredSequence: 020000006300000006000000
-  damage: 20
-  duration: 0.3
-  abilitySprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  forceMagnitude: 15
-  physicsBehavior: 1
-  absoluteDirection: {x: 0, y: -1}
+  _abilityName: DeepDive
+  _attackType: 1
+  _requiredSequence: 020000006300000006000000
+  _damage: 10
+  _duration: 0.5
+  _abilitySprite: {fileID: -496789763897624491, guid: 0d1d2660ee2c7a14c9a5f122ed3ce4b0, type: 3}
+  _forceMagnitude: 15
+  _physicsBehavior: 1
+  _absoluteDirection: {x: 0, y: -1}

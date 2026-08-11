@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour
     [SerializeField]
     private float _maxHealth;
 
-    // Helper Method for UI Health Bar (Useful in the future)
+    // Helper Method for UI Health Bar
     public float RemainingHealthPercentage
     {
         get

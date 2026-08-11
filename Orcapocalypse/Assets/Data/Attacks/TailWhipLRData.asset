@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc294caf21d4b5b4c876745ae7dd880c, type: 3}
   m_Name: TailWhipLRData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbility
-  abilityName: Tail Whip
-  attackType: 2
-  requiredSequence: 040000006300000000000000
-  damage: 10
-  duration: 0.3
-  abilitySprite: {fileID: -7720882871268550879, guid: e9bc139c1e2bb7342b60f910c4f06578, type: 3}
-  forceMagnitude: 20
-  physicsBehavior: 2
-  absoluteDirection: {x: 0, y: 0}
+  _abilityName: Tail Whip
+  _attackType: 2
+  _requiredSequence: 040000006300000000000000
+  _damage: 10
+  _duration: 0.3
+  _abilitySprite: {fileID: -496789763897624491, guid: 0d1d2660ee2c7a14c9a5f122ed3ce4b0, type: 3}
+  _forceMagnitude: 20
+  _physicsBehavior: 2
+  _absoluteDirection: {x: 0, y: 0}
