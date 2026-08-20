@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Yacht
   - Trash
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -63,6 +64,9 @@ TagManager:
     locked: 0
   - name: Boats
     uniqueID: 1303582189
+    locked: 0
+  - name: Harpoon
+    uniqueID: 3752097959
     locked: 0
   - name: Foreground
     uniqueID: 2188940643

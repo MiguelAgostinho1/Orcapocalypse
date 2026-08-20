@@ -20,6 +20,7 @@ public class CoastGuardAI : MonoBehaviour
 
     [Header("References")]
     public Transform orca; // Reference to the player's position
+    public Rigidbody2D orcaRb; // Reference to the player's Rigidbody2D for velocity checks
 
     [Header("Floating Settings")]
     [SerializeField] private float _bobAmplitude = 0.05f;
@@ -31,11 +32,26 @@ public class CoastGuardAI : MonoBehaviour
     public float huntSpeed = 6f;
     public float normalPatrolDistance = 20f;
     public float searchPatrolDistance = 5f;
+    public float trailDistance = 4f; // How far behind the Orca the Coast Guard will try to follow
 
     [Header("Detection Settings")]
     public float detectionRadius = 10f; // How close the boat needs to be to spot the Orca
     public float loseInterestRadius = 15f; // Distance before the boat gives up the hunt entirely
     public float stealthYLevel = -4f; // The Y-axis value the Orca must dive below to hide
+
+    [Header("Shooting Settings")]
+    public Transform firePoint;
+    public GameObject harpoonPrefab;
+    public float harpoonSpeed = 15f;
+
+    [Tooltip("The highest angle it can fire (0 is straight ahead, negative is aiming down)")]
+    public float maxUpperAngle = -10f;
+
+    [Tooltip("The lowest angle it can fire (e.g., -80 is almost straight down)")]
+    public float maxLowerAngle = -80f;
+
+    public float fireCooldown = 2f;
+    private float _fireTimer = 0f;
 
     private float _startYSettle;
     private float _timer;
@@ -51,7 +67,7 @@ public class CoastGuardAI : MonoBehaviour
         UpdateFacing();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float previousX = transform.position.x;
 
@@ -75,14 +91,48 @@ public class CoastGuardAI : MonoBehaviour
 
     private void HuntUpdate()
     {
-        // Aggressively follow the Orca's X position
-        Vector2 targetPosition = new Vector2(orca.position.x, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, huntSpeed * Time.deltaTime);
+        // 1. Movement logic
+        float distanceToOrcaX = Mathf.Abs(orca.position.x - transform.position.x);
 
-        // Transition: Hunt -> Search
+        if (distanceToOrcaX > trailDistance)
+        {
+            Vector2 targetPosition = new Vector2(orca.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, huntSpeed * Time.fixedDeltaTime);
+        }
+
+        // 2. Shooting logic
+        _fireTimer += Time.fixedDeltaTime;
+
+        if (_fireTimer >= fireCooldown && IsOrcaInFiringAngle())
+        {
+            _fireTimer = 0f; // Reset cooldown
+            FireHarpoon();
+        }
+
+        // 3. Transition logic: Hunt -> Search
         if (HasOrcaDisappeared())
         {
             ChangeState(State.Search);
+        }
+    }
+
+    // Placeholder method for the actual attack
+    private void FireHarpoon()
+    {
+        Vector2 predictedPos = GetPredictedOrcaPosition();
+
+        // Aim at the predicted future position
+        Vector2 direction = (predictedPos - (Vector2)firePoint.position).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle - 90f);
+
+        GameObject harpoon = Instantiate(harpoonPrefab, firePoint.position, rotation);
+
+        Rigidbody2D rb = harpoon.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = direction * harpoonSpeed;
         }
     }
 
@@ -174,14 +224,21 @@ public class CoastGuardAI : MonoBehaviour
 
     private void UpdateMovementDirection(float previousX)
     {
-        // Compare the new position to the old position to determine direction
-        if (transform.position.x > previousX)
+        float deltaX = transform.position.x - previousX;
+
+        // 1. If moving, face the direction of movement (with a 0.01 deadzone to prevent micro-jitters)
+        if (deltaX > 0.01f)
         {
             _currentDirection = MoveDirection.Right;
         }
-        else if (transform.position.x < previousX)
+        else if (deltaX < -0.01f)
         {
             _currentDirection = MoveDirection.Left;
+        }
+        // 2. If we are stationary (inside the trail zone) AND hunting, aim at the Orca
+        else if (currentState == State.Hunt)
+        {
+            _currentDirection = (orca.position.x > transform.position.x) ? MoveDirection.Right : MoveDirection.Left;
         }
 
         // Apply the visual flip 
@@ -225,6 +282,41 @@ public class CoastGuardAI : MonoBehaviour
         return isHidden || outOfRange;
     }
 
+    private bool IsOrcaInFiringAngle()
+    {
+        if (firePoint == null) return false;
+
+        // Get the predicted position of the Orca based on its current velocity
+        Vector2 predictedPos = GetPredictedOrcaPosition();
+
+        // Convert the predicted position to local space relative to the fire point
+        Vector3 localTargetPos = firePoint.InverseTransformPoint(predictedPos);
+
+        // Calculate the angle to the target in degrees
+        float aimAngle = Mathf.Atan2(localTargetPos.y, localTargetPos.x) * Mathf.Rad2Deg;
+
+        // Check if the angle falls between our upper and lower limits
+        // Since we are aiming down, the values are negative. (e.g., is -45 between -80 and -10?)
+        return aimAngle >= maxLowerAngle && aimAngle <= maxUpperAngle;
+    }
+
+    private Vector2 GetPredictedOrcaPosition()
+    {
+        // Failsafe: If we forgot to assign the Rigidbody, just shoot at its center
+        if (orcaRb == null) return orca.position;
+
+        // 1. How far away is the Orca right now?
+        float distance = Vector2.Distance(firePoint.position, orca.position);
+
+        // 2. How long will the harpoon take to cross that distance?
+        float timeToHit = distance / harpoonSpeed;
+
+        // 3. Where will the Orca be in that amount of time?
+        Vector2 predictedPosition = (Vector2)orca.position + (orcaRb.linearVelocity * timeToHit);
+
+        return predictedPosition;
+    }
+
     // --- Debugging Gizmos ---
     private void OnDrawGizmos()
     {
@@ -242,5 +334,21 @@ public class CoastGuardAI : MonoBehaviour
         Vector3 leftPoint = new Vector3(-100f, stealthYLevel, 0f);
         Vector3 rightPoint = new Vector3(100f, stealthYLevel, 0f);
         Gizmos.DrawLine(leftPoint, rightPoint);
+
+        // Draw the Shooting Angle (Green)
+        if (firePoint != null)
+        {
+            // Calculate the local directions using trig (cos, sin)
+            Vector3 upperDirLocal = new Vector3(Mathf.Cos(maxUpperAngle * Mathf.Deg2Rad), Mathf.Sin(maxUpperAngle * Mathf.Deg2Rad), 0);
+            Vector3 lowerDirLocal = new Vector3(Mathf.Cos(maxLowerAngle * Mathf.Deg2Rad), Mathf.Sin(maxLowerAngle * Mathf.Deg2Rad), 0);
+
+            // Convert local directions back to world directions so Gizmos can draw them
+            Vector3 upperDirWorld = firePoint.TransformDirection(upperDirLocal);
+            Vector3 lowerDirWorld = firePoint.TransformDirection(lowerDirLocal);
+
+            Gizmos.color = Color.magenta; // Pink lines just like the sketch
+            Gizmos.DrawRay(firePoint.position, upperDirWorld * 7f);
+            Gizmos.DrawRay(firePoint.position, lowerDirWorld * 7f);
+        }
     }
 }

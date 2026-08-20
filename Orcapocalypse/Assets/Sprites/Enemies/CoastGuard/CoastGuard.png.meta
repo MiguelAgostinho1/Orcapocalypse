@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 2157182633743838919
     second: CoastGuard_1
+  - first:
+      213: -4966674958615209930
+    second: CoastGuard_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -145,10 +148,10 @@ TextureImporter:
       name: CoastGuard_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 18
-        width: 1492
-        height: 988
+        x: 13
+        y: 26
+        width: 1642
+        height: 906
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,10 +170,10 @@ TextureImporter:
       name: CoastGuard_1
       rect:
         serializedVersion: 2
-        x: 1068
-        y: 25
-        width: 15
-        height: 23
+        x: 1349
+        y: 56
+        width: 11
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,6 +184,28 @@ TextureImporter:
       bones: []
       spriteID: 7ce61f71d2adfed10800000000000000
       internalID: 2157182633743838919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CoastGuard_2
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 54
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63899e09073d21bb0800000000000000
+      internalID: -4966674958615209930
       vertices: []
       indices: 
       edges: []
@@ -201,6 +226,7 @@ TextureImporter:
     nameFileIdTable:
       CoastGuard_0: 2515988165435449571
       CoastGuard_1: 2157182633743838919
+      CoastGuard_2: -4966674958615209930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
