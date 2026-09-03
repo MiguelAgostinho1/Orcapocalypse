@@ -52,7 +52,6 @@ public class TrashInstance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Make sure your Orca GameObject has the "Player" tag in the Inspector!
         if (other.CompareTag("Player"))
         {
             // Check if the object we hit has a HealthController

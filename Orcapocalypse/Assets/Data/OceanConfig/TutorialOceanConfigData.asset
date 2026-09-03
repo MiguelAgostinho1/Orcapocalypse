@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4734da162acf34e904c3066be73c60, type: 3}
   m_Name: TutorialOceanConfigData
   m_EditorClassIdentifier: Assembly-CSharp::OceanConfig
+  skyTopColor: {r: 0.4, g: 0.7, b: 1, a: 1}
+  skyBottomColor: {r: 0.7, g: 0.9, b: 1, a: 1}
+  seaSurfaceColor: {r: 0, g: 0.7, b: 0.85, a: 1}
+  seaMidColor: {r: 0, g: 0.35, b: 0.65, a: 1}
+  seaDeepColor: {r: 0.01, g: 0.08, b: 0.25, a: 1}
+  frontSeabedTint: {r: 1, g: 1, b: 1, a: 1}
+  backSeabedTint: {r: 0.5, g: 0.5, b: 0.7, a: 1}
   waterLevel: 2.7
-  minXBound: -13.5
-  maxXBound: 13.5
-  oceanFloorY: -2.1
+  minXBound: -18
+  maxXBound: 18
+  TopYBound: 12
+  oceanFloorY: -2

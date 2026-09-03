@@ -15,7 +15,7 @@ public class SmallFishSchool : MonoBehaviour
     [Tooltip("Particle burst triggered when the player is actively eating.")]
     [SerializeField] private ParticleSystem _consumptionBurstParticles;
 
-    private float _currentHealthPool;
+    [SerializeField] private float _currentHealthPool;
     private float _tickTimer;
     private const float TICK_INTERVAL = 0.1f; // Dispense health 10 times a second for smooth feedback
 

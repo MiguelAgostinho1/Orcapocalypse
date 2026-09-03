@@ -50,11 +50,11 @@ public class PlayerAbility : ScriptableObject
 
     private void ApplyMovementForce(Rigidbody2D rb, PlayerMovement movement)
     {
-        Debug.Log($"Activating {_abilityName} with physics behavior: {_physicsBehavior}");
+        // Debug.Log($"Activating {_abilityName} with physics behavior: {_physicsBehavior}");
         switch (_physicsBehavior)
         {
             case PhysicsBehavior.DynamicDash:
-                Debug.Log("Applying Dynamic Dash Force");
+                // Debug.Log("Applying Dynamic Dash Force");
                 // 1. Grab where the player is currently steering with the stick
                 Vector2 dashDir = movement.GetMovementInput();
                 
@@ -70,14 +70,14 @@ public class PlayerAbility : ScriptableObject
                 break;
 
             case PhysicsBehavior.AbsoluteDirection:
-                Debug.Log("Applying Absolute Direction Force");
+                // Debug.Log("Applying Absolute Direction Force");
                 // Always goes in a strict inspector-defined direction (e.g. Deep Dive)
                 rb.linearVelocity = Vector2.zero;
                 rb.AddForce(_absoluteDirection.normalized * _forceMagnitude, ForceMode2D.Impulse);
                 break;
 
             case PhysicsBehavior.KillMomentum:
-                Debug.Log("Killing Momentum");
+                // Debug.Log("Killing Momentum");
                 // STRICTLY stop the character. No forces, no movement.
                 rb.linearVelocity = Vector2.zero;
                 break;
