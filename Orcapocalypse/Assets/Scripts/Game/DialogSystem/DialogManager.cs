@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class DialogManager : MonoBehaviour
     public Image portraitRight;
 
     [Header("Typewriter Settings")]
-    public float typingSpeed = 0.05f;
+    [Tooltip("1 = Normal speed, 2 = 2x faster, 0.5 = half speed")]
+    public float typingSpeed = 1f;
+    private float baseCharDelay = 0.04f; // Base delay per character (approx 25 chars/sec)
 
     [Header("Prompt UI & Icons")]
     public Image continuePromptImage;
@@ -32,6 +35,8 @@ public class DialogManager : MonoBehaviour
     public int charsPerBlip = 2; // Plays a sound every 2 characters so it isn't deafening
 
     private Queue<DialogLine> linesQueue;
+    private Coroutine typingCoroutine;
+    private string currentSentence;
     private bool _isTyping = false;
     private bool _isDialogOpen = false;
 
@@ -64,10 +69,8 @@ public class DialogManager : MonoBehaviour
         {
             if (_isTyping)
             {
-                // Optional: We can ignore input while typing so they can't skip, 
-                // OR we could force the text to finish instantly here.
-                // For now, as requested, we do nothing while typing so it forces them to read.
-                return;
+                // Instantly complete the line
+                CompleteLineInstantly();
             }
             else
             {
@@ -121,10 +124,17 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    private void CompleteLineInstantly()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        dialogText.text = currentSentence;
+        _isTyping = false;
+    }
+
     public void DisplayNextLine()
     {
-        if (continuePromptImage != null) continuePromptImage.gameObject.SetActive(false); // Hide immediately on press
-
         // If there are no lines left, end the conversation
         if (linesQueue.Count == 0)
         {
@@ -162,29 +172,23 @@ public class DialogManager : MonoBehaviour
 
         // 3. Start the Typewriter
         StopAllCoroutines(); // Stop any current typing before starting a new one
-        StartCoroutine(TypeSentence(nextLine));
+        typingCoroutine = StartCoroutine(TypeSentence(nextLine));
     }
 
     private IEnumerator TypeSentence(DialogLine line)
     {
         _isTyping = true;
-        if (continuePromptImage != null) continuePromptImage.gameObject.SetActive(false); // Hide prompt while typing
-
         dialogText.text = "";
-        int charCount = 0;
+
+        currentSentence = line.text;
+
+        // Higher typingSpeed = smaller delay = faster typing
+        float delay = baseCharDelay / Mathf.Max(0.01f, typingSpeed);
 
         foreach (char letter in line.text.ToCharArray())
         {
             dialogText.text += letter;
-
-            if (line.voiceBlip != null && charCount % charsPerBlip == 0 && letter != ' ')
-            {
-                audioSource.pitch = Random.Range(minPitch, maxPitch);
-                audioSource.PlayOneShot(line.voiceBlip);
-            }
-
-            charCount++;
-            yield return new WaitForSeconds(typingSpeed);
+            yield return new WaitForSeconds(delay);
         }
 
         _isTyping = false;

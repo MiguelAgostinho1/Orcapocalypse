@@ -1358,7 +1358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &726401029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   nameText: {fileID: 1420957238}
   portraitLeft: {fileID: 2046160628}
   portraitRight: {fileID: 1985842465}
-  typingSpeed: 0.05
+  typingSpeed: 1
   continuePromptImage: {fileID: 494127162}
   xboxIcon: {fileID: 2747690628134850419, guid: a9716c16a44a94eed9b5c90fbf4d9bdd, type: 3}
   playstationIcon: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
@@ -1645,6 +1645,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialTarget
   myType: 1
+--- !u!1 &867360604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1786632795003408117, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
+  m_PrefabInstance: {fileID: 3323646006495095441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949604901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,6 +1750,11 @@ RectTransform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6439486385221065527, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
   m_PrefabInstance: {fileID: 2137712998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1193101884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2351359869335319075, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
+  m_PrefabInstance: {fileID: 3323646006495095441}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1307386316
 GameObject:
@@ -2046,8 +2056,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df1ef9806ec28244a30aeddb15419cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
-  pauseMenuUI: {fileID: 0}
-  resumeButton: {fileID: 0}
+  pauseMenuUI: {fileID: 1193101884}
+  resumeButton: {fileID: 867360604}
   isPaused: 0
 --- !u!4 &1640385863
 Transform:
@@ -2884,10 +2894,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1640385863}
     m_Modifications:
+    - target: {fileID: 1786632795003408117, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1927592256219786468, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1640385862}
+    - target: {fileID: 2351359869335319075, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3181396603991776137, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
@@ -2976,6 +2994,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1640385862}
+    - target: {fileID: 9134720209503738851, guid: 3918d316f0f30a94e8cec70654e395c0, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
