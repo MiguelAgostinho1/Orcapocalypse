@@ -92,10 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81aa583fd27bd74a952877c4d14f160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallFishSchool
-  totalHealthPool: 10
-  baseHealthPerSecond: 5
-  schoolParticles: {fileID: 1123694458168191479}
-  consumptionBurstParticles: {fileID: 0}
+  _totalHealthPool: 25
+  _baseHealthPerSecond: 5
+  _schoolParticles: {fileID: 1123694458168191479}
+  _consumptionBurstParticles: {fileID: 0}
+  _currentHealthPool: 0
 --- !u!1 &3961506257445542641
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,7 +4899,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -588693831
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_RenderMode: 0
