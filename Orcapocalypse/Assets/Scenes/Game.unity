@@ -13295,7 +13295,7 @@ PrefabInstance:
       objectReference: {fileID: 182706500}
     - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _flipDelay
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _maxXBound

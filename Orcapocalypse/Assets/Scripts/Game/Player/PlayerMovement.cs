@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _gravityInAir = 20f;
     [SerializeField] private float _flipSpeed = 5f;
-    [SerializeField] private float _flipDelay = 0.5f;
+    [SerializeField] private float _flipDelay = 0.1f;
 
     [Header("Sprite Settings")]
     [SerializeField] private Sprite _idleSprite;
@@ -109,10 +109,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rigidbody.linearVelocity.magnitude > 0.1f)
         {
-            float angle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
-            Quaternion targetRot = Quaternion.Euler(0, 0, angle);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.fixedDeltaTime * 10f);
-
             bool movingLeft = _rigidbody.linearVelocity.x < -0.1f;
             if (movingLeft != _isFlipped)
             {
@@ -121,18 +117,39 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _isFlipped = movingLeft;
                     _flipTimer = 0;
+
+                    if (_anim != null)
+                    {
+                        _anim.SetTrigger("Flip");
+                    }
                 }
             }
             else { _flipTimer = 0; }
 
-            float targetYScale = _isFlipped ? -_initialScale : _initialScale;
-            float smoothedY = Mathf.Lerp(transform.localScale.y, targetYScale, Time.fixedDeltaTime * _flipSpeed);
-            transform.localScale = new Vector3(_initialScale, smoothedY, 1f);
+            float targetAngle;
+            if (_isFlipped)
+            {
+                targetAngle = Mathf.Atan2(-_rigidbody.linearVelocity.y, -_rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
+            }
+            else
+            {
+                targetAngle = Mathf.Atan2(_rigidbody.linearVelocity.y, _rigidbody.linearVelocity.x) * Mathf.Rad2Deg;
+            }
+
+            Quaternion targetRot = Quaternion.Euler(0, 0, targetAngle);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.fixedDeltaTime * 10f);
+
+            // Instantly flip the X scale instead of Y
+            float targetXScale = _isFlipped ? -_initialScale : _initialScale;
+            transform.localScale = new Vector3(targetXScale, _initialScale, 1f);
         }
         else
         {
-            Quaternion targetRotation = Quaternion.Euler(0, 0, _isFlipped ? 180 : 0);
+            Quaternion targetRotation = Quaternion.Euler(0, 0, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 2f);
+
+            float targetXScale = _isFlipped ? -_initialScale : _initialScale;
+            transform.localScale = new Vector3(targetXScale, _initialScale, 1f);
         }
     }
 
