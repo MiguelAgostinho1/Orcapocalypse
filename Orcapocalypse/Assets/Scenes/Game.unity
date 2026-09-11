@@ -13231,11 +13231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4735522616974091425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Size.x
-      value: 3.4413352
+      value: 3.6984148
       objectReference: {fileID: 0}
     - target: {fileID: 4735522616974091425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Size.y
-      value: 1.465765
+      value: 1.5534048
       objectReference: {fileID: 0}
     - target: {fileID: 4735522616974091425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Offset.x
@@ -13243,8 +13243,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4735522616974091425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Offset.y
-      value: 0.0111551285
+      value: 0.008233547
       objectReference: {fileID: 0}
+    - target: {fileID: 4735522616974091425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3.6766462
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735522616974091425, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 460227759733406671, guid: 57d69aeb0e33a944a9c24471d30dae0f, type: 3}
     - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -13281,6 +13293,10 @@ PrefabInstance:
       propertyPath: _anim
       value: 
       objectReference: {fileID: 182706500}
+    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: _flipDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _maxXBound
       value: 82.2

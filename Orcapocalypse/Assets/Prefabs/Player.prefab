@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2451329808439682367, guid: 0d1d2660ee2c7a14c9a5f122ed3ce4b0, type: 3}
+  m_Sprite: {fileID: 460227759733406671, guid: 57d69aeb0e33a944a9c24471d30dae0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,7 +199,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.494935, y: 3.6299999}
+    oldSize: {x: 3.6766462, y: 1.53}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -312,17 +312,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0026803017, y: 0.0048591495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.494935, y: 3.6299999}
+    oldSize: {x: 3.6766462, y: 1.53}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 8.494935, y: 3.6299999}
+  m_Size: {x: 3.715341, y: 1.5468019}
   m_EdgeRadius: 0
 --- !u!114 &7778316014332368525
 MonoBehaviour:
@@ -341,7 +341,7 @@ MonoBehaviour:
   _flipSpeed: 5
   _flipDelay: 0.5
   _idleSprite: {fileID: -1807650363082549093, guid: 4fd7d7d02a290004a886cd56dbe2d204, type: 3}
-  anim: {fileID: 6902218642348771}
+  _anim: {fileID: 0}
   _oceanConfig: {fileID: 11400000, guid: 1f85a5c4e02797e47af36493cbc2ab37, type: 2}
 --- !u!114 &7692838134618973941
 MonoBehaviour:
@@ -355,8 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a34dae4bde3c34e9df5103543da339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
-  currentHealth: 50
-  maxHealth: 50
+  _currentHealth: 0
+  _maxHealth: 0
   isInvincible: 0
   OnDied:
     m_PersistentCalls:
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84812855d8626954f94669ea0082e9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamagedInvincibility
-  invincibilityDuration: 2
+  _invincibilityDuration: 0
 --- !u!114 &7884784571220269492
 MonoBehaviour:
   m_ObjectHideFlags: 0

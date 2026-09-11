@@ -1,0 +1,345 @@
+fileFormatVersion: 2
+guid: 57d69aeb0e33a944a9c24471d30dae0f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1919160857710349108
+    second: Character_swim_0
+  - first:
+      213: 1388664423296636787
+    second: Character_swim_1
+  - first:
+      213: 460227759733406671
+    second: Character_swim_2
+  - first:
+      213: -7830171557696114037
+    second: Character_swim_3
+  - first:
+      213: -3858677615136015721
+    second: Character_swim_4
+  - first:
+      213: -2093420707850229421
+    second: Character_swim_5
+  - first:
+      213: 5161568212201184591
+    second: Character_swim_6
+  - first:
+      213: -4575289021881409648
+    second: Character_swim_7
+  - first:
+      213: -6949023225706369901
+    second: Character_swim_8
+  - first:
+      213: -3078020253827243193
+    second: Character_swim_9
+  - first:
+      213: 6801278010904023369
+    second: Character_swim_10
+  - first:
+      213: 7142211525378039290
+    second: Character_swim_11
+  - first:
+      213: -8797274302315523037
+    second: Character_swim_12
+  - first:
+      213: 2644136249440573483
+    second: Character_swim_13
+  - first:
+      213: 4054086583068050629
+    second: Character_swim_14
+  - first:
+      213: 1076212762906875160
+    second: Character_swim_15
+  - first:
+      213: 2225885190384221304
+    second: Character_swim_16
+  - first:
+      213: -438460917236190420
+    second: Character_swim_17
+  - first:
+      213: -1729617300223911655
+    second: Character_swim_18
+  - first:
+      213: -8753789051153126345
+    second: Character_swim_19
+  - first:
+      213: 8931445528194124892
+    second: Character_swim_20
+  - first:
+      213: -5608782284148399478
+    second: Character_swim_21
+  - first:
+      213: 8170335519613070287
+    second: Character_swim_22
+  - first:
+      213: 7011876459793875753
+    second: Character_swim_23
+  - first:
+      213: -4273548949414832289
+    second: Character_swim_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 500
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Character_swim_2
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 782
+        width: 1838
+        height: 765
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcbfea685be036600800000000000000
+      internalID: 460227759733406671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_swim_3
+      rect:
+        serializedVersion: 2
+        x: 3111
+        y: 658
+        width: 1574
+        height: 890
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b82f72d4474a55390800000000000000
+      internalID: -7830171557696114037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_swim_4
+      rect:
+        serializedVersion: 2
+        x: 5378
+        y: 782
+        width: 1838
+        height: 765
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79af0173729337ac0800000000000000
+      internalID: -3858677615136015721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_swim_6
+      rect:
+        serializedVersion: 2
+        x: 8139
+        y: 783
+        width: 1607
+        height: 998
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d133c11f291a740800000000000000
+      internalID: 5161568212201184591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2e81c369f9e70d047964ab9dd3f1698e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Character_swim_0: -1919160857710349108
+      Character_swim_1: 1388664423296636787
+      Character_swim_10: 6801278010904023369
+      Character_swim_11: 7142211525378039290
+      Character_swim_12: -8797274302315523037
+      Character_swim_13: 2644136249440573483
+      Character_swim_14: 4054086583068050629
+      Character_swim_15: 1076212762906875160
+      Character_swim_16: 2225885190384221304
+      Character_swim_17: -438460917236190420
+      Character_swim_18: -1729617300223911655
+      Character_swim_19: -8753789051153126345
+      Character_swim_2: 460227759733406671
+      Character_swim_20: 8931445528194124892
+      Character_swim_21: -5608782284148399478
+      Character_swim_22: 8170335519613070287
+      Character_swim_23: 7011876459793875753
+      Character_swim_24: -4273548949414832289
+      Character_swim_25: 1898822327
+      Character_swim_3: -7830171557696114037
+      Character_swim_4: -3858677615136015721
+      Character_swim_5: -2093420707850229421
+      Character_swim_6: 5161568212201184591
+      Character_swim_7: -4575289021881409648
+      Character_swim_8: -6949023225706369901
+      Character_swim_9: -3078020253827243193
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
