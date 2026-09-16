@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _gravityInAir = 20f;
-    [SerializeField] private float _flipSpeed = 5f;
     [SerializeField] private float _flipDelay = 0.1f;
 
     [Header("Sprite Settings")]

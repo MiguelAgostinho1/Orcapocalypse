@@ -94,12 +94,12 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 460227759733406671, guid: 57d69aeb0e33a944a9c24471d30dae0f, type: 3}
+  m_Sprite: {fileID: 460227759733406671, guid: 1f4b12a95d896084dbcd446fc7d9f078, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 18.383232, y: 7.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -199,8 +199,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.6766462, y: 1.53}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 18.383232, y: 7.65}
+    newSize: {x: 18.383232, y: 7.65}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -316,8 +316,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.6766462, y: 1.53}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 18.383232, y: 7.65}
+    newSize: {x: 18.383232, y: 7.65}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -338,7 +338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _speed: 5
   _gravityInAir: 3
-  _flipSpeed: 5
   _flipDelay: 0.5
   _idleSprite: {fileID: -1807650363082549093, guid: 4fd7d7d02a290004a886cd56dbe2d204, type: 3}
   _anim: {fileID: 0}

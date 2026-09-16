@@ -13181,9 +13181,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6902218642348771, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5dad8b29716f3e84a9ba88f3fc67b531, type: 2}
     - target: {fileID: 960502461836417758, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 960502461836417758, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2000818793383585502, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Material
@@ -13254,9 +13262,17 @@ PrefabInstance:
       value: 1.53
       objectReference: {fileID: 0}
     - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_Size.x
+      value: 3.6766462
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_Size.y
+      value: 1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 460227759733406671, guid: 57d69aeb0e33a944a9c24471d30dae0f, type: 3}
+      objectReference: {fileID: 460227759733406671, guid: 1f4b12a95d896084dbcd446fc7d9f078, type: 3}
     - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -13267,6 +13283,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507133785513638158, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692838134618973941, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
@@ -13309,6 +13329,10 @@ PrefabInstance:
       propertyPath: _minYBound
       value: -23.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
+      propertyPath: _idleSprite
+      value: 
+      objectReference: {fileID: 4216705331314206822, guid: 2517af58a0b0e5743a6ea0129c235a85, type: 3}
     - target: {fileID: 7778316014332368525, guid: 59536522ce738d54e860a193c1fe35af, type: 3}
       propertyPath: _waterLevel
       value: -0.5
