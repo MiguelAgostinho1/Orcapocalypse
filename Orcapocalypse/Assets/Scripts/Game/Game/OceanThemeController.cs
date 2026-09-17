@@ -16,6 +16,7 @@ public class OceanThemeController : MonoBehaviour
     private static readonly int SeaMidColorID = Shader.PropertyToID("_SeaMidColor");
     private static readonly int SeaSurfaceColorID = Shader.PropertyToID("_SeaSurfaceColor");
     private static readonly int SkyBottomColorID = Shader.PropertyToID("_SkyBottomColor");
+    private static readonly int SkyMidColorID = Shader.PropertyToID("_SkyMidColor");
     private static readonly int SkyTopColorID = Shader.PropertyToID("_SkyTopColor");
 
     private static readonly int LevelTopYID = Shader.PropertyToID("_LevelTopY");
@@ -49,6 +50,7 @@ public class OceanThemeController : MonoBehaviour
 
         // Send colors
         targetMaterial.SetColor(SkyTopColorID, _oceanConfig.skyTopColor);
+        targetMaterial.SetColor(SkyMidColorID, _oceanConfig.skyMidColor);
         targetMaterial.SetColor(SkyBottomColorID, _oceanConfig.skyBottomColor);
         targetMaterial.SetColor(SeaSurfaceColorID, _oceanConfig.seaSurfaceColor);
         targetMaterial.SetColor(SeaMidColorID, _oceanConfig.seaMidColor);

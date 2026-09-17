@@ -5,6 +5,7 @@ public class OceanConfig : ScriptableObject
 {
     [Header("Sky Gradient")]
     public Color skyTopColor = new Color(0.4f, 0.7f, 1.0f);
+    public Color skyMidColor = new Color(0.7f, 0.9f, 1.0f);
     public Color skyBottomColor = new Color(0.7f, 0.9f, 1.0f);
 
     [Header("Sea Gradient")]
