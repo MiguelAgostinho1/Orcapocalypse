@@ -11058,7 +11058,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 2ef72e100b7b2ae4889fe1c22de9ba85, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.7, a: 1}
+  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.69803923, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -12924,6 +12924,10 @@ PrefabInstance:
     - target: {fileID: 1026524511524105950, guid: 18378a67e4ec27047b9a160cd4a81041, type: 3}
       propertyPath: m_Name
       value: CoastGuard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026524511524105950, guid: 18378a67e4ec27047b9a160cd4a81041, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1346172268835908139, guid: 18378a67e4ec27047b9a160cd4a81041, type: 3}
       propertyPath: orca
