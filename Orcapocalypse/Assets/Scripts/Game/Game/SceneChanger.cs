@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required to load scenes!
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {

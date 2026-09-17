@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: c35bd8baf48d4bb40a6f328169d84552
+guid: ac87cf79cb9869d498628a5f758f1915
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1919160857710349108
-    second: Character_swim_0
+      213: 4755120364891800856
+    second: TestTurn_0
   - first:
-      213: 1388664423296636787
-    second: Character_swim_1
+      213: -9105837054875319495
+    second: TestTurn_1
   - first:
-      213: 460227759733406671
-    second: Character_swim_2
+      213: -6189167438705013723
+    second: TestTurn_2
   - first:
-      213: -7830171557696114037
-    second: Character_swim_3
+      213: 6925872040553027972
+    second: TestTurn_3
+  - first:
+      213: 6072235556345198116
+    second: TestTurn_4
+  - first:
+      213: 4229195190600312483
+    second: TestTurn_5
+  - first:
+      213: -1665129065934494161
+    second: TestTurn_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,11 +157,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_swim_0
+      name: TestTurn_0
       rect:
         serializedVersion: 2
-        x: 354
-        y: 894
+        x: 462
+        y: 898
         width: 1838
         height: 765
       alignment: 0
@@ -163,8 +172,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc437593e55cd55e0800000000000000
-      internalID: -1919160857710349108
+      spriteID: 8150a9537c49df140800000000000000
+      internalID: 4755120364891800856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTurn_4
+      rect:
+        serializedVersion: 2
+        x: 3716
+        y: 870
+        width: 979
+        height: 772
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 426b370011ae44450800000000000000
+      internalID: 6072235556345198116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTurn_5
+      rect:
+        serializedVersion: 2
+        x: 6510
+        y: 886
+        width: 834
+        height: 756
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a6a58d5e9e11ba30800000000000000
+      internalID: 4229195190600312483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestTurn_6
+      rect:
+        serializedVersion: 2
+        x: 9301
+        y: 870
+        width: 979
+        height: 772
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f26ebcfcfe544e8e0800000000000000
+      internalID: -1665129065934494161
       vertices: []
       indices: 
       edges: []
@@ -173,7 +248,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 400ce51e160c12f42999fe8dd01d952b
+    spriteID: 64c6604a72e0496439c04a9d79ce8581
     internalID: 0
     vertices: []
     indices: 
@@ -183,10 +258,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Character_swim_0: -1919160857710349108
-      Character_swim_1: 1388664423296636787
-      Character_swim_2: 460227759733406671
-      Character_swim_3: -7830171557696114037
+      TestTurn_0: 4755120364891800856
+      TestTurn_1: -9105837054875319495
+      TestTurn_2: -6189167438705013723
+      TestTurn_3: 6925872040553027972
+      TestTurn_4: 6072235556345198116
+      TestTurn_5: 4229195190600312483
+      TestTurn_6: -1665129065934494161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

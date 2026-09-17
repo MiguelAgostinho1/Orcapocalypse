@@ -18,7 +18,7 @@ MonoBehaviour:
   seaMidColor: {r: 0.03529412, g: 0.54901963, b: 0.9098039, a: 1}
   seaDeepColor: {r: 0, g: 0.05490196, b: 0.6901961, a: 1}
   frontSeabedTint: {r: 1, g: 1, b: 1, a: 1}
-  backSeabedTint: {r: 0.5, g: 0.5, b: 0.7, a: 1}
+  backSeabedTint: {r: 0.5019608, g: 0.5019608, b: 0.69803923, a: 1}
   waterLevel: -0.5
   minXBound: -80.8
   maxXBound: 80.9
