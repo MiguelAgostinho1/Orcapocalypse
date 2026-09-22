@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestureParser
   innerDeadzone: 0.25
-  sectorLeeway: 10
+  sectorLeeway: 22.5
   abilityDatabase: {fileID: 11400000, guid: dcc8ae00b4ce8664daa56270d8d1ea0c, type: 2}
   bufferSize: 15
   gestureTimeout: 1

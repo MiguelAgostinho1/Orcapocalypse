@@ -6479,6 +6479,7 @@ Material:
     - _SeaMidColor: {r: 0.03529412, g: 0.54901963, b: 0.9098039, a: 1}
     - _SeaSurfaceColor: {r: 0.4, g: 0.92156863, b: 0.9882353, a: 1}
     - _SkyBottomColor: {r: 0.5764706, g: 0.94509804, b: 0.99215686, a: 1}
+    - _SkyMidColor: {r: 0.7, g: 0.9, b: 1, a: 1}
     - _SkyTopColor: {r: 0.49019608, g: 0.88235295, b: 0.98039216, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
@@ -13174,7 +13175,7 @@ PrefabInstance:
       objectReference: {fileID: 531079723}
     - target: {fileID: 8824824551852251193, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
       propertyPath: sectorLeeway
-      value: 15
+      value: 22.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
