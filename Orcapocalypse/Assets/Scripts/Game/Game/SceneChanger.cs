@@ -7,9 +7,20 @@ public class SceneChanger : MonoBehaviour
     [Tooltip("The exact name of the scene you want to load (e.g., 'Level_02')")]
     [SerializeField] private string _sceneToLoad;
 
+    [Header("Visualizer")]
+    [SerializeField] private GameObject visual;
+
     [Header("Lock Settings")]
     [Tooltip("If true, the player cannot trigger this exit until it is unlocked via script.")]
     public bool isLocked = false;
+
+    private void Awake()
+    {
+        if (visual != null)
+        {
+            visual.SetActive(!isLocked); // Show or hide the visual based on the lock state
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,7 +31,7 @@ public class SceneChanger : MonoBehaviour
             if (isLocked)
             {
                 Debug.Log("The exit is locked! Finish your tasks first.");
-                // TODO: You could trigger a UI popup here later
+                // TODO: Could trigger a UI popup here later
                 return; // Stop the code here so the scene doesn't load
             }
 
@@ -41,11 +52,13 @@ public class SceneChanger : MonoBehaviour
     public void UnlockExit()
     {
         isLocked = false;
+        if (visual != null) visual.SetActive(true); // Show the visual indicator that the exit is now unlocked
         Debug.Log("Level Exit Unlocked!");
     }
 
     public void LockExit()
     {
         isLocked = true;
+        if (visual != null) visual.SetActive(false); // Hide the visual indicator that the exit is now locked
     }
 }

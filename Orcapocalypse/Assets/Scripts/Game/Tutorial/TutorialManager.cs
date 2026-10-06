@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
     [Header("References")]
     public SceneChanger levelExit;
+    public TextMeshProUGUI BallObjectiveText;
+    public TextMeshProUGUI BoatObjectiveText;
 
     [Header("Objectives")]
     public int requiredBallHits = 3;
@@ -31,11 +34,13 @@ public class TutorialManager : MonoBehaviour
         if (type == TutorialTarget.TargetType.Ball)
         {
             _currentBallHits++;
+            BallObjectiveText.text = $"Attack the Ball: {_currentBallHits}/{requiredBallHits}";
             Debug.Log($"Ball hit! ({_currentBallHits}/{requiredBallHits})");
         }
         else if (type == TutorialTarget.TargetType.Boat)
         {
             _currentBoatHits++;
+            BoatObjectiveText.text = $"Attack the Boat: {_currentBoatHits}/{requiredBoatHits}";
             Debug.Log($"Boat hit! ({_currentBoatHits}/{requiredBoatHits})");
         }
 
@@ -46,6 +51,8 @@ public class TutorialManager : MonoBehaviour
     {
         if (_currentBallHits >= requiredBallHits && _currentBoatHits >= requiredBoatHits)
         {
+            BallObjectiveText.text = "Tutorial Complete! Unlocking Exit.";
+            BoatObjectiveText.text = "";
             Debug.Log("Tutorial Complete! Unlocking Exit.");
             levelExit.UnlockExit();
 

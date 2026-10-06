@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a34dae4bde3c34e9df5103543da339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
-  currentHealth: 20
-  maxHealth: 20
+  _currentHealth: 10
+  _maxHealth: 10
   isInvincible: 0
   OnDied:
     m_PersistentCalls:
