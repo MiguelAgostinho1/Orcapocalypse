@@ -6904,6 +6904,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1095570200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8445089675170883055, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
+  m_PrefabInstance: {fileID: 7946616266876546802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1095570201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095570200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64be65ec1c887724a8a2f7793dfe86e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelObjectiveManager
+  _yachtsRemaining: 0
 --- !u!1 &1103649910
 GameObject:
   m_ObjectHideFlags: 0
@@ -13654,7 +13672,7 @@ PrefabInstance:
       objectReference: {fileID: 2003424229}
     - target: {fileID: 2897659551874387476, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
       propertyPath: isLocked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2897659551874387476, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
       propertyPath: _sceneToLoad
@@ -13707,7 +13725,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8445089675170883055, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1095570201}
   m_SourcePrefab: {fileID: 100100000, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
 --- !u!1001 &7975380355742125342
 PrefabInstance:

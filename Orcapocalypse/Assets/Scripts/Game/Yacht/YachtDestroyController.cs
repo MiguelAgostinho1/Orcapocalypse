@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class YachtDestroyController : MonoBehaviour
 {
     [Header("Death Settings")]
     [SerializeField] private Sprite _wreckedSprite;
+
+    public static event Action OnYachtDestroyed;
 
     private YachtMovement _movement;
     private SpriteRenderer _spriteRenderer;
@@ -26,6 +29,7 @@ public class YachtDestroyController : MonoBehaviour
     public void StartSinking()
     {
         if (_isSinking) return;
+        OnYachtDestroyed?.Invoke();
         StartCoroutine(SinkingSequence());
     }
 

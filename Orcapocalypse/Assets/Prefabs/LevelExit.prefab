@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 7416358463174157163}
   - component: {fileID: 7982523451464749219}
   - component: {fileID: 2897659551874387476}
+  - component: {fileID: 6658670345191558902}
   m_Layer: 0
   m_Name: LevelExit
   m_TagString: Untagged
@@ -168,7 +169,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChanger
   _sceneToLoad: Tutorial
+  visual: {fileID: 0}
   isLocked: 0
+--- !u!114 &6658670345191558902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445089675170883055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64be65ec1c887724a8a2f7793dfe86e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelObjectiveManager
+  _yachtsRemaining: 0
 --- !u!1 &8600456705395420840
 GameObject:
   m_ObjectHideFlags: 0
