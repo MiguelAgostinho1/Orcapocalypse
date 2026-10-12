@@ -2577,6 +2577,10 @@ PrefabInstance:
       propertyPath: _sceneToLoad
       value: PrivateIsland
       objectReference: {fileID: 0}
+    - target: {fileID: 6658670345191558902, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7416358463174157163, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
       propertyPath: m_LocalScale.x
       value: 5

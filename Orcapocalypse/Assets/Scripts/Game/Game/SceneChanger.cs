@@ -12,7 +12,7 @@ public class SceneChanger : MonoBehaviour
 
     [Header("Lock Settings")]
     [Tooltip("If true, the player cannot trigger this exit until it is unlocked via script.")]
-    public bool isLocked = false;
+    [SerializeField] private bool isLocked = false;
 
     private void Awake()
     {
