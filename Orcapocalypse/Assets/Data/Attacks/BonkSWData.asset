@@ -19,5 +19,5 @@ MonoBehaviour:
   _duration: 0.3
   _abilitySprite: {fileID: -496789763897624491, guid: 0d1d2660ee2c7a14c9a5f122ed3ce4b0, type: 3}
   _forceMagnitude: 15
-  _physicsBehavior: 0
-  _absoluteDirection: {x: 0, y: 0}
+  _physicsBehavior: 1
+  _absoluteDirection: {x: 0.5, y: -0.5}

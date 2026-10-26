@@ -118,7 +118,7 @@ public class FlickInputUI : MonoBehaviour
 
         if (playerCombat != null)
         {
-            playerCombat.OnGestureRecognized(ability.GetAttackType(), ability.GetAbilityName());
+            playerCombat.OnGestureRecognized(ability);
         }
     }
 

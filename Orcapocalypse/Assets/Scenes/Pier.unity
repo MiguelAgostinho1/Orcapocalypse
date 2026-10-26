@@ -4648,7 +4648,7 @@ Transform:
   m_GameObject: {fileID: 681631936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.66, z: 0}
+  m_LocalPosition: {x: 0, y: -12.7247, z: 0}
   m_LocalScale: {x: 1, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4708,7 +4708,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 164, y: 5.56}
+  m_Size: {x: 164, y: 5.128634}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -8674,7 +8674,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -2106026653
-  m_SortingLayer: 9
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8404141952534549930, guid: e801ffc452e8b4a4d94f0bb3080c3066, type: 3}
@@ -8682,7 +8682,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 164, y: 1.5}
+  m_Size: {x: 164, y: 1.4445387}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -8696,7 +8696,7 @@ Transform:
   m_GameObject: {fileID: 1365051341}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.61, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6377, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13822,6 +13822,10 @@ PrefabInstance:
       propertyPath: _sceneToLoad
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 6658670345191558902, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
+      propertyPath: YachtsObjectiveText
+      value: 
+      objectReference: {fileID: 7975380355742125343}
     - target: {fileID: 7416358463174157163, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
       propertyPath: m_LocalPosition.x
       value: 85.84
@@ -13992,11 +13996,26 @@ PrefabInstance:
       propertyPath: sectorLeeway
       value: 22.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8824824551852251193, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
+      propertyPath: abilityDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: dcc8ae00b4ce8664daa56270d8d1ea0c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
+--- !u!114 &7975380355742125343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590317891217612512, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
+  m_PrefabInstance: {fileID: 7975380355742125342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &8144520367394155121
 PrefabInstance:
   m_ObjectHideFlags: 0

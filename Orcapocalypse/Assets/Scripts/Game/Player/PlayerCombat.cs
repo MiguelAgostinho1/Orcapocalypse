@@ -22,9 +22,9 @@ public class PlayerCombat : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
     }
 
-    public void OnGestureRecognized(GestureParser.AttackType type, string abilityName)
+    public void OnGestureRecognized(PlayerAbility ability)
     {
-        PlayerAbility ability = System.Array.Find(abilityDatabase.allAbilities, a => a.GetAttackType() == type && a.GetAbilityName() == abilityName);
+        GestureParser.AttackType type = ability.GetAttackType();
 
         if (ability != null && IsOffCooldown(type))
         {
@@ -50,7 +50,7 @@ public class PlayerCombat : MonoBehaviour
         // 3. Wait for the exact duration of this specific move
         yield return new WaitForSeconds(ability.GetDuration());
 
-        // 4. The move is done! Tell PlayerMovement to restore its default idle visual state
+        // 4. The move is done. Tell PlayerMovement to restore its default idle visual state
         _movement.ResetToIdleVisuals();
         CurrentActiveAbility = null;
         _activeAbilityCoroutine = null;

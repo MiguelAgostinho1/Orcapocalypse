@@ -34,13 +34,13 @@ public class TutorialManager : MonoBehaviour
         if (type == TutorialTarget.TargetType.Ball)
         {
             _currentBallHits++;
-            BallObjectiveText.text = $"Attack the Ball: {_currentBallHits}/{requiredBallHits}";
+            BallObjectiveText.text = $"- Attack the Ball: {_currentBallHits}/{requiredBallHits}";
             Debug.Log($"Ball hit! ({_currentBallHits}/{requiredBallHits})");
         }
         else if (type == TutorialTarget.TargetType.Boat)
         {
             _currentBoatHits++;
-            BoatObjectiveText.text = $"Attack the Boat: {_currentBoatHits}/{requiredBoatHits}";
+            BoatObjectiveText.text = $"- Attack the Boat: {_currentBoatHits}/{requiredBoatHits}";
             Debug.Log($"Boat hit! ({_currentBoatHits}/{requiredBoatHits})");
         }
 

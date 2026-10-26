@@ -50,7 +50,7 @@ public class PlayerAbility : ScriptableObject
 
     private void ApplyMovementForce(Rigidbody2D rb, PlayerMovement movement)
     {
-        // Debug.Log($"Activating {_abilityName} with physics behavior: {_physicsBehavior}");
+        Debug.Log($"Activating {_abilityName} with physics behavior: {_physicsBehavior}");
         switch (_physicsBehavior)
         {
             case PhysicsBehavior.DynamicDash:

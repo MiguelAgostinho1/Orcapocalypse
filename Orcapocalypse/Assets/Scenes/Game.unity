@@ -13024,6 +13024,10 @@ PrefabInstance:
       propertyPath: _sceneToLoad
       value: Antartica
       objectReference: {fileID: 0}
+    - target: {fileID: 6658670345191558902, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
+      propertyPath: YachtsObjectiveText
+      value: 
+      objectReference: {fileID: 7975380355742125343}
     - target: {fileID: 7416358463174157163, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
       propertyPath: m_LocalPosition.x
       value: 84.97
@@ -13195,6 +13199,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
+--- !u!114 &7975380355742125343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590317891217612512, guid: 47a3c6d8ea987fb43a095d123479a6c4, type: 3}
+  m_PrefabInstance: {fileID: 7975380355742125342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &8144520367394155121
 PrefabInstance:
   m_ObjectHideFlags: 0
