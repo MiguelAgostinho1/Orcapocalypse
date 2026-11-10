@@ -13678,6 +13678,10 @@ PrefabInstance:
       propertyPath: _sceneToLoad
       value: Pier
       objectReference: {fileID: 0}
+    - target: {fileID: 6658670345191558902, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
+      propertyPath: YachtsObjectiveText
+      value: 
+      objectReference: {fileID: 7975380355742125343}
     - target: {fileID: 7416358463174157163, guid: cc6f591b5db5b0447adbdf14c8c42018, type: 3}
       propertyPath: m_LocalPosition.x
       value: 85.84
